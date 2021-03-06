@@ -1,0 +1,9 @@
+R1: recebe n;
+R2: se n >= 1 então vá para R3 senão vá para R9;
+R3: faça  y = 0 e va para R4;
+R4: faça i = 1 e va para R5;
+R5: faça y = y + i e va para R6;
+R6: escreve y e va para R7;
+R7: faça i = i + 1 e va para R8;
+R8: se i > n va para RX senao va para R5;
+R9: escreve erro;
