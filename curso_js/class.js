@@ -22,3 +22,9 @@ class Pessoa{
 const p1 = new Pessoa('Pedro', 19);
 
 p1.falar("Eae carai");
+
+p1.nome = "Faleiros"
+
+p1.falar("Eae carai");
+
+Object.freeze(p1)
