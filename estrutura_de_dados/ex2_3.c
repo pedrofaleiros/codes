@@ -5,7 +5,6 @@
     e a segunda metade dos N números deverá ser armazenado em uma segunda lista.
     Mostre na tela quais valores são comuns entre as 2 listas ligadas.
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 
