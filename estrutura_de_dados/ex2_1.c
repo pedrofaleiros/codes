@@ -44,6 +44,8 @@ int main(){
 
     }
 
+    //printf("elemento: %d\n", numeros->inicio->prox->prox->valor);
+
     return 0;
 }
 
