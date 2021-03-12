@@ -18,8 +18,12 @@ function carregar(){
     let min = date.getMinutes()
     let sec = date.getSeconds()
     if(min < 10){
-        txt.innerText = `${hora}:0${min}:${sec}`
-    }else{
-        txt.innerText = `${hora}:${min}:${sec}`
+        min = "0"+min
     }
+    if(sec < 10){
+        sec = "0"+sec
+    }
+    txt.innerText = `${hora}:${min}:${sec}`
 }
+
+setInterval(carregar, 1000)
