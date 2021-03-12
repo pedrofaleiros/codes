@@ -1,2 +1,7 @@
-# teste00
-teste00
+# Meus codigos
+git init
+//git remote add origin ....
+//git clone .....
+git add .
+git commit -m ""
+git push
