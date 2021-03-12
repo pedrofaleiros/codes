@@ -20,3 +20,17 @@ div#hora{
     border-radius: 20px;
     width: 150px;
 }
+
+#data{
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    width: 150px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: rgb(138, 255, 60);
+    border-radius: 10px;
+    border: 1px solid black;
+    
+}
+

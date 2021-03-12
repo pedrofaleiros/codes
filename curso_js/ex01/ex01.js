@@ -26,4 +26,5 @@ function carregar(){
     txt.innerText = `${hora}:${min}:${sec}`
 }
 
+
 setInterval(carregar, 1000)
