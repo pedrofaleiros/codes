@@ -19,15 +19,15 @@ int main()
 
     if(n <= 0){
         printf("Erro\n");
-        exit(-1);
-    }
+        //exit(-1);
+    }else{
+        for(int i = 1; i <= n; i++){
+            int aux = sequencia(i);
+            printf("%d ", aux);
+        }
 
-    for(int i = 1; i <= n; i++){
-        int aux = sequencia(i);
-        printf("%d ", aux);
+        printf("\n");
     }
-
-    printf("\n");
 
     return 0;
 }
