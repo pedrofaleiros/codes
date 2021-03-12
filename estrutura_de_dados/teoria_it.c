@@ -3,7 +3,7 @@
 
 int main()
 {
-    int n, y = 1, i;
+    int n;
     printf("Numero N: ");
     scanf("%d", &n);
 
@@ -12,7 +12,9 @@ int main()
         exit(-1);
     }
 
-    for(i = 0; i < n; i++){
+
+    int y = 1;
+    while(y < n*2){
         printf("%d ", y);
         y += 2;
     }

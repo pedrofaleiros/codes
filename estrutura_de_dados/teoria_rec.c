@@ -3,10 +3,10 @@
 
 int sequencia(int n)
 {
-    if(n == 1){
-        return 1;
-    }else{
+    if(n > 1){
         return sequencia(n-1) + 2;
+    }else{
+        return 1;
     }
 }
 
@@ -17,16 +17,17 @@ int main()
     printf("Numero N: ");
     scanf("%d", &n);
 
-    if(n <= 0){
-        printf("Erro\n");
-        //exit(-1);
-    }else{
-        for(int i = 1; i <= n; i++){
-            int aux = sequencia(i);
-            printf("%d ", aux);
+    if(n > 0){
+        int y = 1;
+        while(y <= n){
+            //int aux = sequencia(y);
+            printf("%d ", sequencia(y));
+            y += 1;
         }
 
         printf("\n");
+    }else{
+        printf("Erro\n");
     }
 
     return 0;
