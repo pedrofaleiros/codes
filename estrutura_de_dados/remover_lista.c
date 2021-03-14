@@ -55,53 +55,9 @@ int main()
 
 void remove_elemento(lista *l, int num)
 {
+    
+    
 
-    //dando erro
-    if(l->inicio){
-        int achou = 0;
-        
-        if(l->qtd == 1){
-            if(l->inicio->valor == num){
-                l->inicio = NULL;
-                l->qtd = 0;
-                achou = 1;
-            }
-        }else{
-            elemento *aux, *ant;
-
-            int i = 0;
-
-            while(aux && achou == 0){
-
-                if(i == 1){
-                    ant = l->inicio;
-                }
-
-                if(aux->valor == num && i > 0){
-                    ant->prox = aux->prox;
-                    achou = 1;
-                    l->qtd -= 1;
-                }else if(aux->valor == num && i == 0){
-                    l->inicio->prox = NULL;
-                    achou = 1;
-                    l->qtd -= 1;
-                }
-
-                i += 1;
-                aux = aux->prox;
-
-            }
-
-        }
-
-        if(!achou){
-            printf("\nNumero nao esta na lista\n");
-        }
-
-
-    }else{
-        printf("\nA lista esta vazia\n");
-    }
 }
 
 elemento* aloca_elemento()
