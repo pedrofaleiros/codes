@@ -19,6 +19,7 @@ void inclui_elemento(lista *l, int x);
 void mostra_elementos(lista *l);
 elemento* aloca_elemento();
 void remove_elemento(lista *l, int num);
+int achou_numero(lista *l, int n);
 
 // funcoes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -31,7 +32,7 @@ int main()
     numeros->inicio = NULL;
 
     int opcao = 1, num;
-    while(opcao != 0){
+    while(opcao <=3 && opcao > 0){
         printf("\n1 - cadastra\n2 - mostra\n3 - remove\nopcao: ");
         scanf("%d", &opcao);
 
@@ -48,17 +49,73 @@ int main()
         }
     }
 
-
-
     return 0;
+}
+
+int achou_numero(lista *l, int n)
+{
+    int achou = 0;
+
+    if(l->inicio){
+        elemento * aux;
+
+        aux = l->inicio;
+
+        while(aux)
+        {
+            if(aux->valor == n){
+                achou = 1;
+                break;
+            }
+            aux = aux->prox;
+        }
+
+    }
+
+    return achou;
 }
 
 void remove_elemento(lista *l, int num)
 {
-    
-    
+    if(achou_numero(l, num)){
 
-}
+        if(l->qtd == 1){
+            l->inicio = NULL;
+            l->qtd -= 1;
+            printf("\nNumero removido\n\n");
+        }else{
+            elemento *aux, *ant;
+            int primeira_exec = 1;
+
+            aux = l->inicio;
+            while(aux){
+                
+                if(aux->valor == num){
+                    if(primeira_exec){
+                        l->inicio = aux->prox;
+                        break;
+                    }else{
+                        ant->prox = aux->prox;
+                        break;
+                    }
+                }
+                
+                if(primeira_exec){
+                    ant = l->inicio;
+                    primeira_exec++;
+                }else{
+                    ant = ant->prox;
+                }
+
+                aux = aux->prox;
+            }
+        }
+
+    }else{
+        printf("\nO numero nao esta na lista\n\n");
+    }
+    
+    }
 
 elemento* aloca_elemento()
 {
