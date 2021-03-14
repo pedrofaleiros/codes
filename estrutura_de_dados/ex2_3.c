@@ -33,6 +33,7 @@ int main()
 
     printf("Numero N: ");
     scanf("%d", &n);
+
     float num = n;
     
     for(;i < n; i++)
@@ -45,7 +46,6 @@ int main()
         }else{
             inclui_elemento(lista2, x);
         }
-
     }
 
     mostra_valores_iguais(lista1, lista2);

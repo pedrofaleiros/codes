@@ -4,13 +4,11 @@
 typedef struct element{
     int valor;
     struct element *prox;
-
 }element;
 
 typedef struct list{
     int qtd;
     struct element * inicio;
-
 }list;
 
 int escolhe_opcao();
@@ -24,16 +22,15 @@ void mostra_pares(list *l);
 int main(){
 
     list *numeros;
+    int opcao = 1, num;
 
     numeros = aloca_lista();
-    
-    int opcao = 1;
+
     while(opcao != 0)
     {
         opcao = escolhe_opcao();
 
         if(opcao == 1){
-            int num;
             num = escolhe_numero();
             inclui_elemento(numeros, num);
         }else if(opcao == 2){
@@ -41,7 +38,6 @@ int main(){
         }else if(opcao == 3){
             mostra_pares(numeros);
         }
-
     }
 
     //printf("elemento: %d\n", numeros->inicio->prox->prox->valor);
@@ -54,10 +50,10 @@ void mostra_pares(list *l)
     if(l->inicio)
     {
         element *aux;
+        int tem_par = 0;
 
         aux = l->inicio;
 
-        int tem_par = 0;
         while(aux)
         {
             if(aux->valor % 2 == 0){
@@ -80,6 +76,7 @@ void mostra_pares(list *l)
         printf("\nLista vazia\n\n");
     }
 }
+
 void mostra_elementos(list *l)
 {
     if(l->inicio)
@@ -147,6 +144,7 @@ list * aloca_lista()
 
     return nova_lista;
 }
+
 int escolhe_opcao()
 {
     int opcao;
@@ -160,6 +158,7 @@ int escolhe_opcao()
 
     return opcao;
 }
+
 int escolhe_numero()
 {
     int numero;

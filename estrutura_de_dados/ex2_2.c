@@ -16,19 +16,19 @@ typedef struct elemento{
 }elemento;
 
 lista* aloca_lista();
-void inclui_elemento(lista *l, int x);
 elemento* aloca_elemento();
+void inclui_elemento(lista *l, int x);
 void mostra_elementos(lista *l);
 
 int main()
 {
     lista *pares;
     lista *impares;
+    int i = 0, num;
 
     pares = aloca_lista();
     impares = aloca_lista();
 
-    int i = 0, num;
     
     for(; i < 10; i++){
         printf("Numero: ");
@@ -42,11 +42,13 @@ int main()
 
     printf("\nLista dos pares:\n");
     mostra_elementos(pares);
+
     printf("\nLista dos impares:\n");
     mostra_elementos(impares);
 
     return 0;
 }
+
 void mostra_elementos(lista *l)
 {
     if(l->inicio){
