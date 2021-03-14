@@ -69,7 +69,6 @@ int achou_numero(lista *l, int n)
             }
             aux = aux->prox;
         }
-
     }
 
     return achou;
@@ -115,7 +114,7 @@ void remove_elemento(lista *l, int num)
         printf("\nO numero nao esta na lista\n\n");
     }
     
-    }
+}
 
 elemento* aloca_elemento()
 {
