@@ -14,6 +14,7 @@ typedef struct elemento{
 lista* aloca_lista();
 elemento* aloca_elemento();
 void inclui_elemento(lista *l, int x);
+void inclui_ordenado(lista *l, int n);
 void mostra_valores_iguais(lista *l1, lista *l2);
 
 int main()
@@ -35,15 +36,50 @@ int main()
         scanf("%d", &x);
 
         if(i < num/2){
-            inclui_elemento(lista1, x);
+            inclui_ordenado(lista1, x);
         }else{
-            inclui_elemento(lista2, x);
+            inclui_ordenado(lista2, x);
         }
     }
 
     mostra_valores_iguais(lista1, lista2);
 
     return 0;
+}
+
+void inclui_ordenado(lista *l, int n)
+{
+    elemento * novo;
+
+    novo = aloca_elemento();
+    novo->valor = n;
+
+    if(l->inicio){
+        elemento *aux = NULL, *ant = NULL;
+
+        aux = l->inicio;
+
+        while(aux)
+        {
+            if(aux->valor > n){
+                ant = aux;
+                aux = aux->prox;
+            }else{
+                if(ant){
+                    novo->prox = aux;
+                    ant->prox = novo;
+                }else{
+                    l->inicio = novo;
+                    novo->prox = aux;
+                }
+                l->qtd += 1;
+                return;
+            }
+        }
+
+    }else{
+        l->inicio = novo;
+    }
 }
 
 void mostra_valores_iguais(lista *l1, lista *l2)
@@ -81,7 +117,6 @@ void mostra_valores_iguais(lista *l1, lista *l2)
     }
 }
 
-
 lista* aloca_lista()
 {
     lista *nova;
@@ -92,6 +127,7 @@ lista* aloca_lista()
 
     return nova;
 }
+
 elemento* aloca_elemento()
 {
     elemento *novo;
@@ -102,6 +138,7 @@ elemento* aloca_elemento()
 
     return novo;
 }
+
 void inclui_elemento(lista *l, int x)
 {
     elemento *novo;

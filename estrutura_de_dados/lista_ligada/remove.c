@@ -16,6 +16,7 @@ lista * aloca_lista();
 elemento * aloca_elemento();
 void inclui_elemento(lista *l, int num);
 void mostra_lista(lista *l);
+void remove_elemento(lista *l, int n);
 
 int main()
 {
@@ -39,20 +40,53 @@ int main()
                 mostra_lista(numeros);
                 break;
             case 3:
+                printf("Remover numero: ");
+                scanf("%d", &num);
+                remove_elemento(numeros, num);
                 break;
             default:
                 break;
         }
-
     }
 
     return 0;
 }
 
+void remove_elemento(lista *l, int n) // dando erro
+{
+    if(l->inicio){
+        elemento *aux, *ant;
+
+        aux = l->inicio;
+
+        while(aux)
+        {
+            if(aux->valor == n){
+                if(ant == NULL){
+                    l->inicio = aux->prox;
+                }else{
+                    ant->prox = aux->prox;
+                }
+                free(aux);
+                l->qtd -= 1;
+                return;
+            }else{
+                ant = aux;
+                aux = aux->prox;
+            }
+        }
+
+        printf("\nElemento nao esta na lista\n");
+
+    }else{
+        printf("\nLista esta vazia\n");
+    }
+}
+
 void mostra_lista(lista *l)
 {
     if(l->inicio){
-        pessoa *aux;
+        elemento *aux;
 
         aux = l->inicio;
 

@@ -18,6 +18,7 @@ element * aloca_elemento();
 void inclui_elemento(list *l, int x);
 void mostra_elementos(list *l);
 void mostra_pares(list *l);
+void inclui_ordenado(list *l, int n);
 
 int main(){
 
@@ -32,7 +33,7 @@ int main(){
 
         if(opcao == 1){
             num = escolhe_numero();
-            inclui_elemento(numeros, num);
+            inclui_ordenado(numeros, num);
         }else if(opcao == 2){
             mostra_elementos(numeros);
         }else if(opcao == 3){
@@ -43,6 +44,46 @@ int main(){
     //printf("elemento: %d\n", numeros->inicio->prox->prox->valor);
 
     return 0;
+}
+
+void inclui_ordenado(list *l, int n)
+{
+    element * novo;
+
+    novo = aloca_elemento();
+    novo->valor = n;
+
+    if(l->inicio == NULL){
+        l->inicio = novo;
+    }else{
+        element *aux = NULL, *ant = NULL;
+
+        aux = l->inicio;
+        while(aux->prox != NULL)
+        {
+            if(aux->valor > n){
+                if(ant == NULL){
+                    l->inicio = novo;
+                    novo->prox = aux;
+                }else{
+                    novo->prox = aux;
+                    ant->prox = novo;
+                }
+                l->qtd += 1;
+                return;
+            }else{
+                ant = aux;
+                aux = aux->prox;
+            }
+        }
+
+        aux->prox = novo;
+        l->qtd += 1;
+        return;
+        
+    }
+
+
 }
 
 void mostra_pares(list *l)
