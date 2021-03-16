@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 typedef struct elemento{
     int valor;
@@ -18,7 +17,6 @@ elemento * aloca_elemento();
 void inclui_elemento(lista *l, int num);
 void mostra_lista(lista *l);
 void remove_elemento(lista *l, int num);
-void mostra_igual(lista *l, int n);
 
 int main(){
 
@@ -31,22 +29,18 @@ int main(){
     {
         opcao = escolhe_opcao();
 
-        switch(opcao){
-            case 1:
-                printf("Qual numero inserir? ");
-                scanf("%d", &num);
-                inclui_elemento(l, num);
-                break;
-            case 2:
-                mostra_lista(l);
-                break;
-            case 3:
-                printf("Qual numero remover? ");
-                scanf("%d", &num);
-                remove_elemento(l, num);
-                break;
-            default:
-                break;
+        if(opcao == 1){
+            printf("Qual numero inserir? ");
+            scanf("%d", &num);
+            inclui_elemento(l, num);
+        }else if(opcao == 2){
+            mostra_lista(l);
+        }else if(opcao == 3){
+            printf("Qual numero remover? ");
+            scanf("%d", &num);
+            remove_elemento(l, num);
+        }else if(opcao != 0){
+            printf("\nOpcao invalida\n");
         }
     }
 
@@ -68,8 +62,8 @@ void remove_elemento(lista *l, int num)
                 }else{
                     l->inicio = aux->prox;
                 }
-                l->qtd -= 1;
                 achou = 1;
+                l->qtd -= 1;
                 aux = NULL;
             }else{
                 /* if(ant){
@@ -125,11 +119,11 @@ void inclui_elemento(lista *l, int num)
 
         ant->prox = novo;
         l->qtd += 1;
-        return;
+        //return;
     }else{
         l->inicio = novo;
         l->qtd += 1;
-        return;
+        //return;
     }
 }
 
@@ -178,6 +172,7 @@ int escolhe_opcao()
     printf("\n1 - Inserir Numero\n");
     printf("2 - Mostrar Lista\n");
     printf("3 - Remover Elemento\n");
+    printf("0 - Sair\n");
     printf("opcao: ");
 
     scanf("%d", &opcao);
