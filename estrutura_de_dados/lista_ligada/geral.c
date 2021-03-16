@@ -151,7 +151,7 @@ int escolhe_opcao()
 
     printf("\n1 - Incluir\n");
     printf("2 - Mostrar\n");
-    printf("3 - Remover");
+    printf("3 - Remover\n");
     printf("0 - Sair\n");
     printf("Opcao: ");
     scanf("%d", &opcao);
