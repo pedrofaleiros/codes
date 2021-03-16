@@ -72,11 +72,12 @@ void remove_elemento(lista *l, int num)
                 achou = 1;
                 aux = NULL;
             }else{
-                if(ant){
+                /* if(ant){
                     ant = ant->prox;
                 }else{
                     ant = aux;
-                }
+                } */
+                ant = aux;
                 aux = aux->prox;
             }
         }
@@ -112,11 +113,12 @@ void inclui_elemento(lista *l, int num)
                 l->qtd += 1;
                 return;
             }else{
-                if(ant){
+                /* if(ant){
                     ant = ant->prox;
                 }else{
                     ant = aux;
-                }
+                } */
+                ant = aux;
                 aux = aux->prox;
             }
         }
