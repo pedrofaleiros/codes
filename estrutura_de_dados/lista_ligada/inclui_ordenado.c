@@ -61,7 +61,7 @@ void remove_elemento(lista *l, int num)
 
         aux = l->inicio;
 
-        while(aux && !achou){
+        while(aux){
             if(aux->valor == num){
                 if(ant){
                     ant->prox = aux->prox;
