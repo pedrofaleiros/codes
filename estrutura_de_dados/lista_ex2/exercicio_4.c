@@ -6,7 +6,6 @@
  */
 
 //errado
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,13 +21,13 @@ typedef struct elemento{
 
 lista* aloca_lista();
 elemento* aloca_elemento();
-void inclui_elemento(lista *l, int num);
+void inclui_elemento(lista *l, int x);
 void mostra_valores_iguais(lista *l1, lista *l2);
 
 int main()
 {
     int n, i, x;
-    lista * lista1, * lista2;
+    lista * lista1, *lista2;
 
     lista1 = aloca_lista();
     lista2 = aloca_lista();
@@ -55,47 +54,38 @@ int main()
     return 0;
 }
 
-void inclui_elemento(lista *l, int num)
+void mostra_valores_iguais(lista *l1, lista *l2)
 {
-    elemento * novo;
+    if(l1->inicio && l2->inicio){
+        elemento * a1, * a2;
+        int achou_igual = 0;
 
-    novo = aloca_elemento();
-    novo->valor = num;
+        a1 = l1->inicio;
+        a2 = l2->inicio;
 
-    if(l->inicio){
-        elemento * aux, * ant = NULL;
-
-        aux = l->inicio;
-
-        while(aux){
-            if(aux->valor > num){
-                if(ant == NULL){
-                    l->inicio = novo;
-                    novo->prox = aux;
-                }else{
-                    ant->prox = novo;
-                    novo->prox = aux;
-                }
-                l->qtd++;
-                return;
+        printf("\nElementos em comum:\n");
+        while(a1 && a2){
+            if(a1->valor == a2->valor){
+                printf("%d\n", a1->valor);
+                a1 = a1->prox;
+                a2 = a2->prox;
+                achou_igual = 1;
             }else{
-                ant = aux;
-                aux = aux->prox;
+                if(a1->valor > a2->valor){
+                    a2 = a2->prox;
+                }else{
+                    a1 = a1->prox;
+                }
             }
         }
 
-        aux->prox = novo;
+        if(!achou_igual){
+            printf("Nenhum numero em comum\n");
+        }
 
     }else{
-        l->inicio = novo;
+        printf("\nLista vazia\n");
     }
-    l->qtd++;
-    return;
-}
-
-void mostra_valores_iguais(lista *l1, lista *l2)
-{
-   printf("aaa\n");
 }
 
 lista* aloca_lista()
@@ -118,4 +108,41 @@ elemento* aloca_elemento()
     novo->prox = NULL;
 
     return novo;
+}
+
+void inclui_elemento(lista *l, int x)
+{
+    elemento * novo;
+
+    novo = aloca_elemento();
+    novo->valor = x;
+
+    if(l->inicio){
+        elemento * aux, * ant;
+
+        ant = NULL;
+        aux = l->inicio;
+
+        while(aux){
+            if(aux->valor > x){
+                if(ant){
+                    ant->prox = novo;
+                }else{
+                    l->inicio = novo;
+                }
+                novo->prox = aux;
+                l->qtd += 1;
+                return;
+            }else{
+                ant = aux;
+                aux = aux->prox;
+            }
+        }
+
+        ant->prox = novo;
+
+    }else{
+        l->inicio = novo;
+    }
+    l->qtd += 1;
 }
