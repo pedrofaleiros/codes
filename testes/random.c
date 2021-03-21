@@ -25,7 +25,7 @@ int main(){
     l1 = aloca_lista();
 
     while(num){
-        printf("Numero: ");
+        //printf("Numero: ");
         scanf("%d", &num);
 
         if(num){
