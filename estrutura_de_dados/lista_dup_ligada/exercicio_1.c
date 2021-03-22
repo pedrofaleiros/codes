@@ -110,42 +110,41 @@ void remove_primos(lista *l)
 
 void remove_elemento(lista *l, int num)
 {
-    if(l->inicio){
+   if(l->inicio){
         elemento * aux;
-        
+
         aux = l->inicio;
 
-        if(l->qtd == 1 && aux->valor == num){
-            l->inicio = NULL;
-            l->fim = NULL;
-            aux = NULL;
-        }
-
-        while(aux)
-        {
+        if(l->qtd == 1){
             if(aux->valor == num){
-                if(l->inicio == aux){
-                    l->inicio = aux->prox;
-                    aux = aux->prox;
-                    aux->ant = NULL;
-                }else if(l->fim == aux){
-                    l->fim = aux->ant;
-                    aux = aux->ant;
-                    aux->prox = NULL;
+                l->inicio = NULL;
+                l->fim = NULL;
+                aux = NULL;
+            }
+        }else{
+            while(aux){
+                if(aux->valor == num){
+                    if(aux == l->inicio){
+                        l->inicio = aux->prox;
+                        aux->prox->ant = NULL;
+                    }else if(aux == l->fim){
+                        l->fim = aux->ant;
+                        aux->ant->prox = NULL;
+                    }else{
+                        aux->ant->prox = aux->prox;
+                        aux->prox->ant = aux->ant;
+                    }
+                    l->qtd--;
+                    aux = NULL;
                 }else{
-                    aux->ant->prox = aux->prox;
-                    aux->prox->ant = aux->ant;
+                    aux = aux->prox;
                 }
-            }else{
-                aux = aux->prox;
             }
         }
-
-        l->qtd--;
-
-    }else{
-        printf("\nLista vazia\n");
-    }
+        
+   }else{
+       printf("\nElemento nao encontrado\n");
+   }
 }
 
 void mostra_pelo_final(lista *l)
