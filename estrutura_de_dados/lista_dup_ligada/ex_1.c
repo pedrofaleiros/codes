@@ -115,7 +115,39 @@ void remove_elemento(lista * l){
     printf("\nRemover numero: ");
     scanf("%d", &num);
 
-    
+    if(l->inicio == NULL){
+        printf("\nNumero nao encontrado\n");
+    }else{
+        elemento * aux;
+
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor != num){
+            aux = aux->prox;
+        }
+
+        if(aux->valor == num){
+            if(l->qtd == 1){
+                l->inicio = NULL;
+                l->fim = NULL;
+            }else if(l->inicio == aux){
+                l->inicio = aux->prox;
+                aux->prox->ant = NULL;
+            }else if(l->fim == aux){
+                l->fim = aux->ant;
+                aux->ant->prox = NULL;
+            }else{
+                aux->ant->prox = aux->prox;
+                aux->prox->ant = aux->ant;
+            }
+
+            printf("\nNumero removido\n");
+            l->qtd -= 1;
+        }else{
+            printf("\nNumero nao encontrado\n");
+        }
+         
+    }
 
 }
 
