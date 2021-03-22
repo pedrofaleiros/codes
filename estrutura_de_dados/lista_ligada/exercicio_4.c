@@ -122,7 +122,7 @@ void inclui_elemento(lista *l, int x)
         ant = NULL;
         aux = l->inicio;
 
-        while(aux){
+        while(aux->prox){
             if(aux->valor > x){
                 if(ant){
                     ant->prox = novo;
@@ -138,7 +138,7 @@ void inclui_elemento(lista *l, int x)
             }
         }
 
-        ant->prox = novo;
+        aux->prox = novo;
 
     }else{
         l->inicio = novo;
