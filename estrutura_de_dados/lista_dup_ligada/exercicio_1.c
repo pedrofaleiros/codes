@@ -110,41 +110,36 @@ void remove_primos(lista *l)
 
 void remove_elemento(lista *l, int num)
 {
-   if(l->inicio){
+    if(l->inicio){
         elemento * aux;
 
         aux = l->inicio;
 
-        if(l->qtd == 1){
-            if(aux->valor == num){
+        while(aux->prox && aux->valor != num){
+            aux = aux->prox;
+        }
+
+        if(aux->valor == num){
+            if(l->qtd == 1){
                 l->inicio = NULL;
                 l->fim = NULL;
-                aux = NULL;
+            }else if(l->inicio == aux){
+                l->inicio = aux->prox;
+                aux->prox->ant = NULL;
+            }else if(l->fim == aux){
+                l->fim = aux->ant;
+                aux->ant->prox = NULL;
+            }else{
+                aux->ant->prox = aux->prox;
+                aux->prox->ant = aux->ant;
             }
+            l->qtd -= 1;
         }else{
-            while(aux){
-                if(aux->valor == num){
-                    if(aux == l->inicio){
-                        l->inicio = aux->prox;
-                        aux->prox->ant = NULL;
-                    }else if(aux == l->fim){
-                        l->fim = aux->ant;
-                        aux->ant->prox = NULL;
-                    }else{
-                        aux->ant->prox = aux->prox;
-                        aux->prox->ant = aux->ant;
-                    }
-                    l->qtd--;
-                    aux = NULL;
-                }else{
-                    aux = aux->prox;
-                }
-            }
+            printf("\nNumero nao encontrado\n");
         }
-        
-   }else{
-       printf("\nElemento nao encontrado\n");
-   }
+    }else{
+        printf("\nElemento nao encontrado\n");
+    }
 }
 
 void mostra_pelo_final(lista *l)
@@ -200,7 +195,7 @@ void mostra_primos(lista *l)
         }
 
         if(!achou_primo){
-            printf("\nNenhum numero primo");
+            printf("\n\tNenhum numero primo");
         }
 
         printf("\n");

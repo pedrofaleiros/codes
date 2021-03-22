@@ -146,9 +146,7 @@ void remove_elemento(lista * l){
         }else{
             printf("\nNumero nao encontrado\n");
         }
-         
     }
-
 }
 
 int main()
