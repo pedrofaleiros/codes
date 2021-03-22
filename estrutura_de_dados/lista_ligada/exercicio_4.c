@@ -22,6 +22,7 @@ lista* aloca_lista();
 elemento* aloca_elemento();
 void inclui_elemento(lista *l, int x);
 void mostra_valores_iguais(lista *l1, lista *l2);
+void inclui_ordenado_prof(lista *l, int x);
 
 int main()
 {
@@ -63,7 +64,8 @@ void mostra_valores_iguais(lista *l1, lista *l2)
         a2 = l2->inicio;
 
         printf("\nElementos em comum:\n");
-        while(a1 && a2){
+        while(a1 && a2)
+        {
             if(a1->valor == a2->valor){
                 printf("%d\n", a1->valor);
                 a1 = a1->prox;
@@ -109,7 +111,42 @@ elemento* aloca_elemento()
     return novo;
 }
 
-void inclui_elemento(lista *l, int x)
+void inclui_ordenado_prof(lista *l, int x)
+{
+    elemento * novo;
+
+    novo = aloca_elemento();
+    novo->valor = x;
+
+    if(l->inicio){
+        elemento * aux, * ant;
+
+        ant = NULL;
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor < x){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor > x){
+            if(ant){
+                ant->prox = novo;
+            }else{
+                l->inicio = novo;
+            }
+            novo->prox = aux;
+        }else{
+            aux->prox = novo;
+        }
+
+    }else{
+        l->inicio = novo;
+    }
+    l->qtd++;
+}
+
+void inclui_elemento(lista *l, int x) //inclui ordenado
 {
     elemento * novo;
 
@@ -137,9 +174,7 @@ void inclui_elemento(lista *l, int x)
                 aux = aux->prox;
             }
         }
-
         aux->prox = novo;
-
     }else{
         l->inicio = novo;
     }
