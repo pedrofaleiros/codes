@@ -7,7 +7,9 @@
     e) mostrar lista de tras pra frente
     f) remover elemento da lista
     g) remover primos da lista
- */
+*/
+
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 

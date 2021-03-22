@@ -1,15 +1,9 @@
 /* 
 2) Faça um programa que leia do usuário 10 números inteiros e armazene os números pares em uma lista ligada
 e os números ímpares em uma segunda lista ligada. Mostre o conteúdo das 2 listas;
-
- */
-
-/*
-1) Utilizando como base o programa lista_ligada.c, construa um programa que disponibilize ao usuario as seguintes opcoes
-    a) Incluir na lista: O usuário irá informar um número que será incluído na lista
-    b) Mostrar lista: deverá ser mostrado na tela a lista completa.
-    c) Mostrar pares da lista: deverá ser mostrado na tela apenas os números pares
 */
+
+//  pronto
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -28,8 +22,8 @@ lista * aloca_lista();
 void inclui_na_lista(lista * l, int num);
 void mostra_lista(lista * l);
 
-int main(){
-
+int main()
+{
     lista * pares, * impares;
     int i, num;
 

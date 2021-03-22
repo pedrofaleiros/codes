@@ -3,8 +3,9 @@
     a primeira metade dos N números, deverá ser armazenada em uma lista ligada e a segunda metade dos N números deverá ser 
     armazenado em uma segunda lista.
     Mostre na tela quais valores são comuns entre as 2 listas ligadas.
-   
- */
+*/
+
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -57,7 +58,7 @@ void mostra_valores_iguais(lista *l1, lista *l2)
 {
     int achou_igual = 0;
 
-    printf("\nElementos em comum:\n");
+    printf("\nNumeros em comum:\n");
     if(l1->inicio && l2->inicio){
         elemento *aux1, *aux2;
 

@@ -17,6 +17,40 @@ elemento * aloca_elemento();
 void inclui_elemento(lista *l, int num);
 void mostra_lista(lista *l);
 void remove_elemento(lista *l, int num);
+void inclui_ordenado_prof(lista *l, int x)
+{
+    elemento * novo;
+
+    novo = aloca_elemento();
+    novo->valor = x;
+
+    if(l->inicio){
+        elemento * aux, * ant;
+
+        ant = NULL;
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor < x){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor > x){
+            if(ant){
+                ant->prox = novo;
+            }else{
+                l->inicio = novo;
+            }
+            novo->prox = aux;
+        }else{
+            aux->prox = novo;
+        }
+
+    }else{
+        l->inicio = novo;
+    }
+    l->qtd++;
+}
 
 int main(){
 

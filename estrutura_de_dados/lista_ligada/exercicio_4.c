@@ -2,9 +2,9 @@
 4) Ajuste a solução do exercício 3 para que a pesquisa de números em comuns seja feita utilizando o algoritmo Balance-Line.
     Dicas: A inserção na lista precisa ser ordenada! 
     PRA AGORA
+*/
 
- */
-
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,7 +22,6 @@ lista* aloca_lista();
 elemento* aloca_elemento();
 void inclui_elemento(lista *l, int x);
 void mostra_valores_iguais(lista *l1, lista *l2);
-void inclui_ordenado_prof(lista *l, int x);
 
 int main()
 {
@@ -63,11 +62,11 @@ void mostra_valores_iguais(lista *l1, lista *l2)
         a1 = l1->inicio;
         a2 = l2->inicio;
 
-        printf("\nElementos em comum:\n");
+        printf("\nNumeros em comum:\n");
         while(a1 && a2)
         {
             if(a1->valor == a2->valor){
-                printf("%d\n", a1->valor);
+                printf("> %d\n", a1->valor);
                 a1 = a1->prox;
                 a2 = a2->prox;
                 achou_igual = 1;
@@ -109,41 +108,6 @@ elemento* aloca_elemento()
     novo->prox = NULL;
 
     return novo;
-}
-
-void inclui_ordenado_prof(lista *l, int x)
-{
-    elemento * novo;
-
-    novo = aloca_elemento();
-    novo->valor = x;
-
-    if(l->inicio){
-        elemento * aux, * ant;
-
-        ant = NULL;
-        aux = l->inicio;
-
-        while(aux->prox && aux->valor < x){
-            ant = aux;
-            aux = aux->prox;
-        }
-
-        if(aux->valor > x){
-            if(ant){
-                ant->prox = novo;
-            }else{
-                l->inicio = novo;
-            }
-            novo->prox = aux;
-        }else{
-            aux->prox = novo;
-        }
-
-    }else{
-        l->inicio = novo;
-    }
-    l->qtd++;
 }
 
 void inclui_elemento(lista *l, int x) //inclui ordenado

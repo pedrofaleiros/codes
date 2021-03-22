@@ -4,6 +4,8 @@
     b) Mostrar lista: deverá ser mostrado na tela a lista completa.
     c) Mostrar pares da lista: deverá ser mostrado na tela apenas os números pares
 */
+
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 
