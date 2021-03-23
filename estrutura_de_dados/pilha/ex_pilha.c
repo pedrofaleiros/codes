@@ -104,9 +104,13 @@ int pop()
         elemento * aux;
         aux = pilha->inicio;
 
+        int num = aux->valor;
+
         pilha->inicio = aux->prox;
+        free(aux);
+
         pilha->qtd--;
-        return aux->valor;
+        return num;
     }
 }
 
