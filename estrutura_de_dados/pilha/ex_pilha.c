@@ -3,7 +3,7 @@
 Obs. Implemente as operações Push, pop, stackpop e empty.
 */
 
-// ta errado
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
  
@@ -19,21 +19,23 @@ typedef struct lista{
 
 lista * aloca_lista();
 elemento * aloca_elemento();
-int pop(lista *pilha);
-void push(lista *pilha, int num);
-int empty(lista *pilha);
-//int stackpop(lista *pilha);
+
+void push(int num);
+int pop();
+int empty();
+int stackpop();
+
+lista * pilha;
 
 int main()
 {
-    lista * pilha;
     int opcao = 1, num;
 
     pilha = aloca_lista();
 
     while(opcao){
-        printf("\n\n1 - pop");
-        printf("\n2 - push");
+        printf("\n1 - push");
+        printf("\n2 - pop");
         printf("\n3 - stackpop");
         printf("\n0 - sair");
         printf("\nOpcao: ");
@@ -41,24 +43,36 @@ int main()
         scanf("%d", &opcao);
 
         if(opcao == 1){
-            num = pop(pilha);
-            if(num)
-                printf("\nnumero removido: %d", num);
-        }else if(opcao == 2){
             printf("\nnumero: ");
             scanf("%d", &num);
-            push(pilha, num);
+            push(num);
+        }else if(opcao == 2){
+            num = pop();
+            if(num != -1)
+                printf("\n\tnumero removido: %d\n", num);
         }else if(opcao == 3){
-            //num = stackpop(pilha);
-            if(num)
-                printf("\nelemento do topo: %d", num);
+            num = stackpop();
+            if(num != -1)
+                printf("\nelemento do topo: %d\n", num);
+        }else if(opcao != 0 ){
+            printf("\nOpcao invalida\n");
         }
     }
 
     return 0;
 }
 
-int empty(lista *pilha)
+int stackpop()
+{
+    if(empty()){
+        printf("\npilha vazia\n");
+        return -1;
+    }else{
+        return pilha->inicio->valor;
+    }
+}
+
+int empty()
 {
     if(pilha->inicio == NULL)
         return 1;
@@ -66,54 +80,33 @@ int empty(lista *pilha)
         return 0;
 }
 
-void push(lista *pilha, int num)
+void push(int num)
 {
     elemento * novo;
     novo = aloca_elemento();
     novo->valor = num;
 
-    if(empty(pilha)){
+    if(empty()){
         pilha->inicio = novo;
-        pilha->qtd++;
     }else{
-        elemento * aux;
-
-        aux = pilha->inicio;
-        
-        while(aux->prox){
-            aux = aux->prox;
-        }
-
-        aux->prox = novo;
-        pilha->qtd++;
+        novo->prox = pilha->inicio;
+        pilha->inicio = novo;
     }
+    pilha->qtd++;
 }
 
-int pop(lista *pilha)
+int pop()
 {
-    elemento * aux, * ant = NULL;
-
-    if(empty(pilha)){
-        printf("\npilha vazia");
-        return 0;
+    if(empty()){
+        printf("\npilha vazia\n");
+        return -1;
     }else{
+        elemento * aux;
         aux = pilha->inicio;
 
-        while(aux->prox){
-            ant = aux;
-            aux = aux->prox;
-        }
-
+        pilha->inicio = aux->prox;
         pilha->qtd--;
-        
-        if(ant == NULL){
-            aux = pilha->inicio;
-            pilha->inicio = NULL;
-            return aux->valor;
-        }else{
-            ant->prox = NULL;
-            return ant->valor;
-        }
+        return aux->valor;
     }
 }
 
