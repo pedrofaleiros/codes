@@ -8,6 +8,8 @@
     f) remover elemento da lista
     g) remover primos da lista
  */
+
+// certo
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -77,7 +79,7 @@ int main()
             remove_primos(numeros);
             break;
         case 0:
-            printf("\nFim");
+            printf("\nFim\n");
             break;
         default:
             printf("\nOpcao invalida\n");
@@ -97,14 +99,13 @@ void remove_primos(lista *l)
         aux = l->inicio;
 
         while(aux){
-            if(verifica_primo(aux->valor)){
+            if(verifica_primo(aux->valor))
                 remove_elemento(l, aux->valor);
-            }
             aux = aux->prox;
         }
 
     }else{
-        printf("\nLista Vazia\n");
+        printf("\nlista vazia");
     }
 }
 
@@ -123,22 +124,24 @@ void remove_elemento(lista *l, int num)
             if(l->qtd == 1){
                 l->inicio = NULL;
                 l->fim = NULL;
-            }else if(l->inicio == aux){
+            }else if(aux == l->inicio){
                 l->inicio = aux->prox;
                 aux->prox->ant = NULL;
-            }else if(l->fim == aux){
+            }else if(aux == l->fim){
                 l->fim = aux->ant;
                 aux->ant->prox = NULL;
             }else{
                 aux->ant->prox = aux->prox;
                 aux->prox->ant = aux->ant;
             }
-            l->qtd -= 1;
+            printf("\nnumero removido: %d", aux->valor);
+            l->qtd--;
         }else{
-            printf("\nNumero nao encontrado\n");
+            printf("\nnumero nao esta na lista");
         }
+
     }else{
-        printf("\nElemento nao encontrado\n");
+        printf("\nlista vazia");
     }
 }
 
@@ -149,14 +152,14 @@ void mostra_pelo_final(lista *l)
 
         aux = l->fim;
 
-        printf("\nElementos:");
+        printf("\nnumeros:");
         while(aux){
             printf("\n> %d", aux->valor);
             aux = aux->ant;
         }
-        printf("\n");
+
     }else{
-        printf("\nLista vazia\n");
+        printf("\nlista vazia\n");
     }
 }
 
@@ -184,9 +187,8 @@ void mostra_primos(lista *l)
 
         aux = l->inicio;
 
-        printf("\nNumeros Primos:");
-        while(aux)
-        {
+        printf("\nnumeros primos:");
+        while(aux){
             if(verifica_primo(aux->valor)){
                 printf("\n> %d", aux->valor);
                 achou_primo = 1;
@@ -194,14 +196,11 @@ void mostra_primos(lista *l)
             aux = aux->prox;
         }
 
-        if(!achou_primo){
-            printf("\n\tNenhum numero primo");
-        }
-
-        printf("\n");
+        if(!achou_primo)
+            printf("\nnenhum numero primo");
 
     }else{
-        printf("\nLista vazia\n");
+        printf("\nlista vazia\n");
     }
 }
 
@@ -212,20 +211,21 @@ void mostra_lista(lista *l)
 
         aux = l->inicio;
 
-        printf("\nElementos:");
+        printf("\nnumeros:");
         while(aux){
             printf("\n> %d", aux->valor);
             aux = aux->prox;
         }
-        printf("\n");
+
     }else{
-        printf("\nLista vazia\n");
+        printf("\nlista vazia\n");
     }
 }
 
 void inclui_no_inicio(lista *l, int num)
 {
     elemento * novo;
+
     novo = aloca_elemento();
     novo->valor = num;
 
@@ -234,10 +234,10 @@ void inclui_no_inicio(lista *l, int num)
 
         aux = l->inicio;
 
-        l->inicio = novo;
-        novo->prox = aux;
         aux->ant = novo;
-
+        novo->prox = aux;
+        l->inicio = novo;
+    
     }else{
         l->inicio = novo;
         l->fim = novo;
@@ -248,6 +248,7 @@ void inclui_no_inicio(lista *l, int num)
 void inclui_no_final(lista *l, int num)
 {
     elemento * novo;
+
     novo = aloca_elemento();
     novo->valor = num;
 
@@ -273,7 +274,7 @@ elemento * aloca_elemento()
 
     novo = (elemento*)malloc(sizeof(elemento));
     novo->valor = 0;
-    novo->prox = NULL;;
+    novo->prox = NULL;
     novo->ant = NULL;
 
     return novo;
@@ -293,22 +294,16 @@ lista * aloca_lista()
 
 int escolhe_opcao()
 {
+    printf("\n----------------------");
     printf("\n1 - Incluir no Inicio");
     printf("\n2 - Incluir No Final");
-    printf("\n\n3 - Mostra Lista");
+    printf("\n3 - Mostra Lista");
     printf("\n4 - Mostra primos");
     printf("\n5 - Mostra ao Contrario");
-    printf("\n\n6 - Remover Elemento");
+    printf("\n6 - Remover Elemento");
     printf("\n7 - Remover todos os primos");
     printf("\n0 - Sair");
     printf("\nOpcao: "); 
-    /* 
-    printf("\n1 - Incluir no Inicio || 5 - Mostra ao Contrario");
-    printf("\n2 - Incluir No Final  || 6 - Remover Elemento");
-    printf("\n3 - Mostra Lista      || 7 - Remover todos os primos");
-    printf("\n4 - Mostra primos     || 0 - Sair");
-    printf("\nOpcao: ");
-    */
 
     int opcao;
     scanf("%d", &opcao);

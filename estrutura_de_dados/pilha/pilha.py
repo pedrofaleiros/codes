@@ -11,6 +11,12 @@ class Pilha():
             return self.stack.pop()
         else:
             return 0
+    
+    def stackpop(self):
+        if not self.empty():
+            return self.stack[-1]
+        else:
+            return 0
 
     def mostra(self):
         if not self.empty():
@@ -27,7 +33,7 @@ class Pilha():
 pilha = Pilha()
 
 while True:
-    print("1 - push\n2 - pop\n3 - mostra\n0 sair")
+    print("\n1 - push\n2 - pop\n3 - mostra\n4 - stackpop\n0 sair")
     opcao = int(input('Opcao: '))
 
     if opcao == 1:
@@ -36,10 +42,16 @@ while True:
     elif opcao == 2:
         num = pilha.pop()
         if num != 0:
-            print(f'removido: {num}')
+            print(f'\nremovido: {num}')
         else:
-            print('pilha vazia')
+            print('\npilha vazia')
     elif opcao == 3:
         pilha.mostra()
+    elif opcao == 4:
+        num = pilha.stackpop()
+        if num != 0:
+            print(f'\nTopo: {num}')
+        else:
+            print('\npilha vazia')
     elif opcao == 0:
         break
