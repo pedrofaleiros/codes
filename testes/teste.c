@@ -8,7 +8,6 @@ int main(){
         printf("%d\n", a);
     }
 
-
     a = 3, b = 2, c = 4;
 
     if(a == b + c){
