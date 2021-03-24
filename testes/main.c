@@ -24,5 +24,15 @@ int main()
 
     printf("\nCoordenadas: (%d, %d)\n", coord.x, coord.y);
 
+    if(n1 and n2)
+        printf("\nsim\n");
+    else
+        printf("\nnao\n");
+
+    if(n1 or n2)
+        printf("\nsim\n");
+    else
+        printf("\nnao\n");
+
     return 0;
 }

@@ -2,6 +2,8 @@
 
 #define False 0
 #define True 1
+#define and &&
+#define or ||
 typedef int bool;
 
 typedef struct coordenada{
@@ -27,8 +29,8 @@ int verifica_primo(int num)
         if(num % i == 0)
             count++;
 
-    if(count == 1)
-        return 1;
-    else
-        return 0;
+    int ret;
+    ret = count == 1 ? 1: 0;
+
+    return ret;
 }
