@@ -12,6 +12,7 @@ typedef struct pessoa{
     float peso;
     struct pessoa *prox;
 }pessoa;
+
 //funcoes >>>>>>>>>>>>>>>>>>>>>
 int escolhe_opcao();
 void cadastra_pessoa(lista *l);

@@ -15,6 +15,7 @@ elemento * aloca_elemento();
 lista * aloca_lista();
 void inclui_ordenado(lista * l, int num);
 void mostra_lista(lista * l);
+void remove_elemento(lista *l, int num);
 
 void inclui_ordenado(lista * l, int num)
 {
@@ -49,6 +50,36 @@ void inclui_ordenado(lista * l, int num)
         l->inicio = novo;
     }
     l->qtd++;
+}
+
+void remove_elemento(lista *l, int num)
+{
+    if(l->inicio != NULL){
+        elemento * aux, * ant = NULL;
+
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor != num){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor == num){
+            if(ant != NULL){
+                ant->prox = aux->prox;
+            }else{
+                l->inicio = aux->prox;
+            }
+            printf("numero removido");
+            free(aux);
+            l->qtd--;
+        }else{
+            printf("numero nao esta na lista");
+        }
+
+    }else{
+        printf("lista vazia");
+    }
 }
 
 lista * aloca_lista()

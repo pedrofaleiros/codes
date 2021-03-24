@@ -10,7 +10,7 @@ int main()
     numeros = aloca_lista();
 
     while(opcao){
-        printf("\n1 - inserir numero\n2 - mostrar lista\n0 - sair\nopcao: ");
+        printf("\n1 - inserir numero\n2 - mostrar lista\n3 - remove numero\n0 - sair\nopcao: ");
         scanf("%d", &opcao);
 
         if(opcao == 1){
@@ -19,6 +19,10 @@ int main()
             inclui_ordenado(numeros, num);
         }else if(opcao == 2){
             mostra_lista(numeros);
+        }else if(opcao == 3){
+            printf("\nremover numero: ");
+            scanf("%d", &num);
+            remove_elemento(numeros, num);
         }
     }
 }

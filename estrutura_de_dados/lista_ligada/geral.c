@@ -102,7 +102,7 @@ void mostra_elementos(lista *l)
     }
 }
 
-void inclui_elemento(lista *l)
+void inclui_elemento(lista *l) // falta melhorar
 {
     int num;
     printf("Numero: ");
