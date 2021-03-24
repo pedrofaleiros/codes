@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define VAZIA printf("\nlista vazia");
+
 typedef struct elemento{
     int valor;
     struct elemento * prox;
@@ -78,7 +80,7 @@ void remove_elemento(lista *l, int num)
         }
 
     }else{
-        printf("lista vazia");
+        VAZIA;
     }
 }
 
@@ -118,6 +120,6 @@ void mostra_lista(lista * l)
             aux = aux->prox;
         }
     }else{
-        printf("\nlista vazia");
+        VAZIA;
     }
 }
