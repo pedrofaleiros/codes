@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "basico.c"
+#include "basico.h"
 
 int main()
 {
