@@ -28,23 +28,17 @@ typedef struct lista{
     struct elemento * fim;
 }lista;
 
-//>>>>>>>>>>funcoes
 lista * aloca_lista();
 elemento * aloca_elemento();
 bool verifica_primo(int num);
-
 void inclui_fim(lista * l, int num);
 void inclui_inicio(lista * l, int num);
-
 void mostra_lista(lista * l);
 void mostra_lista_invertida(lista * l);
 void mostra_primos_lista(lista * l);
-
 void remove_elemento(lista *l, int num);
 void remove_primos(lista *l);
-
 int escolhe_opcao();
-//>>>>>>>>>>funcoes
 
 int main()
 {
@@ -52,10 +46,6 @@ int main()
     int opcao = 1, num;
 
     l = aloca_lista();
-
-    
-    
-    
     
     while(opcao != 0)
     {
@@ -89,27 +79,6 @@ int main()
     }
     
     return 0;
-}
-
-int escolhe_opcao()
-{
-    printf("\n\033[34m");
-    printf("\n1 - incluir no inicio");
-    printf("\n2 - incluir no final");
-    printf("\033[32m");
-    printf("\n3 - mostrar lista");
-    printf("\n4 - mostrar lista invertida");
-    printf("\n5 - mostrar primos");
-    printf("\033[31m");
-    printf("\n6 - remover numero");
-    printf("\n7 - remover primos");
-    printf("\033[m");
-    printf("\n0 - sair");
-    printf("\nopcao> ");
-
-    int opcao;
-    scanf("%d", &opcao);
-    return opcao;
 }
 
 void remove_primos(lista * l)
@@ -168,7 +137,6 @@ void remove_elemento(lista *l, int num)
     }
 }
 
-
 bool verifica_primo(int num)
 {
     int i = 2, count = 0;
@@ -178,7 +146,6 @@ bool verifica_primo(int num)
             count++;
         }
     }
-
     if(count == 1){
         return True;
     }else{
@@ -202,10 +169,8 @@ void mostra_primos_lista(lista * l)
             }
             aux = aux->prox;
         }
-
         if(not tem_primo)
             printf("\n\033[37m nenhum numero primo na lista\033[m");
-
     }else{
         printf("\n\033[31m lista vazia\033[m");
     }
@@ -311,4 +276,25 @@ elemento * aloca_elemento()
     novo->prox = NULL;
 
     return novo;
+}
+
+int escolhe_opcao()
+{
+    printf("\n\033[34m");
+    printf("\n1 - incluir no inicio");
+    printf("\n2 - incluir no final");
+    printf("\033[32m");
+    printf("\n3 - mostrar lista");
+    printf("\n4 - mostrar lista invertida");
+    printf("\n5 - mostrar primos");
+    printf("\033[31m");
+    printf("\n6 - remover numero");
+    printf("\n7 - remover primos");
+    printf("\033[m");
+    printf("\n0 - sair");
+    printf("\nopcao> ");
+
+    int opcao;
+    scanf("%d", &opcao);
+    return opcao;
 }
