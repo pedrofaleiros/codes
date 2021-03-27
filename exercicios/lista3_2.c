@@ -74,19 +74,11 @@ void mostra()
         aux = pilha->topo;
 
         while(aux){
-            if(aux->valor < 10){
-                printf("\n\033[4m|  %d  |\033[m", aux->valor);
-            }else if(aux->valor < 100){
-                printf("\n\033[4m|  %d |\033[m", aux->valor);
-            }else if(aux->valor < 1000){
-                printf("\n\033[4m| %d |\033[m", aux->valor);
-            }else if(aux->valor < 10000){
-                printf("\n\033[4m| %d|\033[m", aux->valor);
-            }
+            printf("\n\033[4m %d \033[m", aux->valor);
             aux = aux->prox;
         }
     }else{
-        printf("\n\033[4m|   |\033[m");
+        printf("\n pilha vazia");
     }
 
     printf("\n");
