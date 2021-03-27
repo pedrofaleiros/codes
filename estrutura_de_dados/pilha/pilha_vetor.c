@@ -10,6 +10,7 @@ int stackpop();
 int empty();
 void push(int num);
 int pop();
+
 int main()
 {
     int opcao = 1, num;
