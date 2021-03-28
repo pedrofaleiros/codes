@@ -74,7 +74,7 @@ int main()
         }else if(opcao == 0){
             printf("\n fim"); 
         }else{
-            printf("\n\033[31m opcao invalida\033[m");
+            printf("\n opcao invalida");
         }
     }
     
@@ -94,7 +94,7 @@ void remove_primos(lista * l)
             aux = aux->prox;
         }
     }else{
-        printf("\n\033[31m lista vazia\033[m");
+        printf("\n lista vazia");
     }
 }
 
@@ -125,15 +125,15 @@ void remove_elemento(lista *l, int num)
                     l->fim = NULL;
                 }
             }
-            printf("\n\033[33m removido: %d\033[m", aux->valor);
+            printf("\n removido: %d", aux->valor);
             free(aux);
             l->qtd--;
         }else{
-            printf("\n\033[31m numero nao esta na lista\033[m");
+            printf("\n numero nao esta na lista");
         }
 
     }else{
-        printf("\n\033[31m lista vazia\033[m");
+        printf("\n lista vazia");
     }
 }
 
@@ -170,9 +170,9 @@ void mostra_primos_lista(lista * l)
             aux = aux->prox;
         }
         if(not tem_primo)
-            printf("\n\033[37m nenhum numero primo na lista\033[m");
+            printf("\n nenhum numero primo na lista");
     }else{
-        printf("\n\033[31m lista vazia\033[m");
+        printf("\n lista vazia");
     }
 }
 
@@ -188,7 +188,7 @@ void mostra_lista(lista * l)
             aux = aux->prox;
         }
     }else{
-        printf("\n\033[31m lista vazia\033[m");
+        printf("\n lista vazia");
     }
 }
 
@@ -204,7 +204,7 @@ void mostra_lista_invertida(lista * l)
             aux = aux->ant;
         }
     }else{
-        printf("\n\033[31m lista vazia\033[m");
+        printf("\n lista vazia");
     }
 }
 
@@ -280,17 +280,17 @@ elemento * aloca_elemento()
 
 int escolhe_opcao()
 {
-    printf("\n\033[34m");
+    printf("\n");
     printf("\n1 - incluir no inicio");
     printf("\n2 - incluir no final");
-    printf("\033[32m");
+    printf("");
     printf("\n3 - mostrar lista");
     printf("\n4 - mostrar lista invertida");
     printf("\n5 - mostrar primos");
-    printf("\033[31m");
+    printf("");
     printf("\n6 - remover numero");
     printf("\n7 - remover primos");
-    printf("\033[m");
+    printf("");
     printf("\n0 - sair");
     printf("\nopcao> ");
 

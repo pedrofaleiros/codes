@@ -20,7 +20,6 @@ typedef struct burger{
     float valor;
     float peso;
     float avaliacao;
-
 }burger;
 
 void cadastra_sanduiche(burger *sand);
