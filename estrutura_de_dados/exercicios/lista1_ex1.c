@@ -58,16 +58,16 @@ int main(){
 void mostra_letra_a(burger *sand, int n){
     int tem_letra = 0;
 
-    printf("\nNomes que comecam com \'a\':\n");
+    printf("\nNomes que comecam com \'a\':");
     for(int i = 0; i < n; i++){
         if(sand[i].nome[0] == 'a'){
             tem_letra = 1;
-            printf("%s\n", sand[i].nome);
+            printf("\n%s", sand[i].nome);
         }
     }
 
     if(!tem_letra){
-        printf("Nenhum nome comeca com \'a\'\n");
+        printf("\nNenhum nome comeca com \'a\'\n");
     }
 
 }
@@ -80,10 +80,10 @@ void mostra_melhor_avaliado(burger *sand, int n){
         }
     }
 
-    printf("\nSanduiche com melhor avaliacao:\n");
+    printf("\nSanduiche com melhor avaliacao:");
     for(int i = 0; i < n; i++){
         if(sand[i].avaliacao == melhor){
-            printf("%s\nAvaliacao: %.2f\nR$%.2f\n%.2f gramas\n", sand[i].nome, sand[i].avaliacao, sand[i].valor, sand[i].peso);
+            printf("\n%s\nAvaliacao: %.2f\nR$%.2f\n%.2f gramas\n", sand[i].nome, sand[i].avaliacao, sand[i].valor, sand[i].peso);
         }
     }
 
@@ -95,7 +95,7 @@ void mostra_peso_medio(burger *sand, int n){
         peso += sand[i].peso;
     }
 
-    printf("\nPeso medio dos sanduiches: %.2f gramas\n", peso/n);
+    printf("\nPeso medio dos sanduiches: %.2f gramas", peso/n);
 }
 
 void mostra_preco_total(burger *sand, int n){
@@ -104,17 +104,17 @@ void mostra_preco_total(burger *sand, int n){
         preco_total += (sand[i].valor * 3);
     }
 
-    printf("\nPreco se pedir 3 de cada: R$%.2f\n", preco_total);
+    printf("\nPreco se pedir 3 de cada: R$%.2f", preco_total);
 }
 
 void cadastra_sanduiche(burger *sand){
-    printf("Nome: ");
+    printf("\nNome: ");
     scanf("%s", sand->nome);
-    printf("Valor: ");
+    printf("\nValor: ");
     scanf("%f", &sand->valor);
-    printf("Peso: ");
+    printf("\nPeso: ");
     scanf("%f", &sand->peso);
-    printf("Avaliacao: ");
+    printf("\nAvaliacao: ");
     scanf("%f", &sand->avaliacao);
 
 }
