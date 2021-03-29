@@ -74,22 +74,26 @@ void remove_primos(lista *l)
 
         while(aux){
             if(verifica_primo(aux->valor)){
-                if(l->qtd == 1){
-                    l->inicio = NULL;
-                    l->fim = NULL;
-                }else if(l->inicio == aux){
+                if(aux->ant == NULL){
                     l->inicio = aux->prox;
-                    aux->prox->ant = NULL;
-                }else if(l->fim == aux){
-                    l->fim = aux->ant;
-                    aux->ant->prox = NULL;
                 }else{
                     aux->ant->prox = aux->prox;
+                }
+
+                if(aux->prox == NULL){
+                    l->fim = aux->ant;
+                }else{
                     aux->prox->ant = aux->ant;
                 }
-                l->qtd -= 1;
+
+                l->qtd--;
+                elemento * removido;
+                removido = aux;
+                aux = aux->prox;
+                free(removido);
+            }else{
+                aux = aux->prox;
             }
-            aux = aux->prox;
         }
     }else
         printf("\nLista Vazia\n");
@@ -106,26 +110,27 @@ void remove_elemento(lista *l)
 
         aux = l->inicio;
 
-        while(aux->prox && aux->valor != num)
-            aux = aux->prox;
+        while(aux){
+            if(aux->valor == num){
+                if(aux->ant == NULL){
+                    l->inicio = aux->prox;
+                }else{
+                    aux->ant->prox = aux->prox;
+                }
 
-        if(aux->valor == num){
-            if(l->qtd == 1){
-                l->inicio = NULL;
-                l->fim = NULL;
-            }else if(l->inicio == aux){
-                l->inicio = aux->prox;
-                aux->prox->ant = NULL;
-            }else if(l->fim == aux){
-                l->fim = aux->ant;
-                aux->ant->prox = NULL;
+                if(aux->prox == NULL){
+                    l->fim = aux->ant;
+                }else{
+                    aux->prox->ant = aux->ant;
+                }
+
+                l->qtd--;
+                free(aux);
+                break;
             }else{
-                aux->ant->prox = aux->prox;
-                aux->prox->ant = aux->ant;
+                aux = aux->prox;
             }
-            l->qtd -= 1;
-        }else
-            printf("\nNumero nao encontrado\n");
+        }
     }else
         printf("\nNumero nao encontrado\n");
 }
