@@ -22,7 +22,9 @@ void push(pilha * p, int num);
 int empty(pilha * p);
 pilha * aloca_pilha();
 elemento * aloca_elemento();
+void inverte_pilha(pilha * p);
 
+void mostra_pilha(pilha * p);
 
 int main()
 {
@@ -35,19 +37,65 @@ int main()
     push(p1, 2);
     push(p1, 3);
     push(p1, 4);
+    push(p1, 5);
+    
+    mostra_pilha(p1);
+    
+    inverte_pilha(p1);
+
+    printf("\ninvertida:");
+    mostra_pilha(p1);
+
+    /* num = stackpop(p1) == -1 ? 0 : pop(p1);
+    printf("\n %d", num);
     num = stackpop(p1) == -1 ? 0 : pop(p1);
     printf("\n %d", num);
-    pop(p1);
     num = stackpop(p1) == -1 ? 0 : pop(p1);
     printf("\n %d", num);
-    pop(p1);
-    pop(p1);
     num = stackpop(p1) == -1 ? 0 : pop(p1);
     printf("\n %d", num);
+    num = stackpop(p1) == -1 ? 0 : pop(p1);
+    printf("\n %d", num); */
     
 
     printf("\n");
     return 0;
+}
+
+void mostra_pilha(pilha * p)
+{
+    if(empty(p))
+        printf("\n pilha vazia");
+    else{
+        elemento * aux;
+        aux = p->topo;
+        while(aux){
+            printf("\n %d", aux->valor);
+            aux = aux->abaixo;
+        }
+    }
+}
+
+void inverte_pilha(pilha * p)
+{
+    pilha * aux;
+    aux = aloca_pilha();
+
+    if(empty(p)){
+        printf("\n a pilha esta vazia");
+    }else{
+        int num;
+        
+        while(num != -1){
+            num = pop(p);
+            if(num != -1){
+                push(aux, num);
+            }
+        }
+
+        p->topo = aux->topo;
+
+    }
 }
 
 int pop(pilha * p)
