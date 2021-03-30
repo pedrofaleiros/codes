@@ -1,8 +1,8 @@
 /* 
-Dada uma pilha P, construir uma função que inverte a ordem dos elementos dessa pilha, 
-utilizando apenas uma estrutura auxiliar.
-Definir adequadamente a estrutura auxiliar e prever a possibilidade da pilha
-estar vazia.  
+Construir uma função que troca de lugar 
+o elemento que está no topo da pilha 
+com o que está na base da pilha. 
+Usar apenas uma pilha como auxiliar. 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,43 +22,62 @@ void push(pilha * p, int num);
 int empty(pilha * p);
 pilha * aloca_pilha();
 elemento * aloca_elemento();
-void inverte_pilha(pilha * p);
-
 void mostra_pilha(pilha * p);
+void troca_topo_base(pilha * p);
 
 int main()
 {
-    pilha * p1;
-    int num;
+    pilha * p;
 
-    p1 = aloca_pilha();
+    p = aloca_pilha();
 
-    push(p1, 1);
-    push(p1, 2);
-    push(p1, 3);
-    push(p1, 4);
-    push(p1, 5);
-    
-    mostra_pilha(p1);
-    
-    inverte_pilha(p1);
+    push(p, 1);
+    push(p, 2);
+    push(p, 3);
+    push(p, 4);
+    push(p, 5);
 
-    printf("\ninvertida:");
-    mostra_pilha(p1);
+    mostra_pilha(p);
 
-    /* num = stackpop(p1) == -1 ? 0 : pop(p1);
-    printf("\n %d", num);
-    num = stackpop(p1) == -1 ? 0 : pop(p1);
-    printf("\n %d", num);
-    num = stackpop(p1) == -1 ? 0 : pop(p1);
-    printf("\n %d", num);
-    num = stackpop(p1) == -1 ? 0 : pop(p1);
-    printf("\n %d", num);
-    num = stackpop(p1) == -1 ? 0 : pop(p1);
-    printf("\n %d", num); */
+    troca_topo_base(p);
+
+    printf("\ntrocado:");
+    mostra_pilha(p);
 
     printf("\n");
     return 0;
+}
+
+void troca_topo_base(pilha * p)
+{
+    int topo, base, num;
+
+    if(empty(p)){
+        printf("\n pilha vazia");
+    }else{
+        pilha * aux;
+        aux = aloca_pilha();
+
+        topo = pop(p);
+
+        if(p->topo == NULL){
+            push(p, topo);
+            return;
+        }
+
+        while(p->topo->abaixo != NULL){
+            push(aux, pop(p));
+        }
+
+        base = pop(p);
+
+        push(p, topo);
+
+        while(aux->topo){
+            push(p, pop(aux));
+        }
+        push(p, base);
+    }
 }
 
 void mostra_pilha(pilha * p)
@@ -72,28 +91,6 @@ void mostra_pilha(pilha * p)
             printf("\n %d", aux->valor);
             aux = aux->abaixo;
         }
-    }
-}
-
-void inverte_pilha(pilha * p)
-{
-    pilha * aux;
-    aux = aloca_pilha();
-
-    if(empty(p)){
-        printf("\n a pilha esta vazia");
-    }else{
-        int num;
-        
-        while(num != -1){
-            num = pop(p);
-            if(num != -1){
-                push(aux, num);
-            }
-        }
-
-        p->topo = aux->topo;
-
     }
 }
 
