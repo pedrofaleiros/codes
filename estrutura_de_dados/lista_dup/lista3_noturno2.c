@@ -27,6 +27,8 @@ typedef struct lista{
     struct elemento * fim;
 }lista;
 
+int menu();
+
 lista * aloca_lista();
 elemento * aloca_elemento();
 
@@ -54,4 +56,19 @@ lista * aloca_lista()
     lista * nova;
     nova = (lista*)calloc(1, sizeof(lista));
     return nova;
+}
+
+int menu()
+{
+    int opcao;
+
+    printf("\n1 - incluir carro");
+    printf("\n2 - procurar carro");
+    printf("\n3 - remover carro pelo chassi");
+    printf("\n4 - mostrar carro mais velho");
+    printf("\n5 - mostrar carro mais caro");
+    printf("\n opcao> ");
+    scanf("%d", &opcao);
+
+    return opcao;
 }
