@@ -37,7 +37,7 @@ void inclui_ordenado(lista * l, int num)
             aux = aux->prox;
         }
 
-        if(aux->valor > num){
+        if(aux->valor >= num){
             if(ant != NULL)
                 ant->prox = novo;
             else
