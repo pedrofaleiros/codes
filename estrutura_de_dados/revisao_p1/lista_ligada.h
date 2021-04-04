@@ -79,14 +79,13 @@ void inclui_ordenado(lista * l, int num)
             aux = aux->prox;
         }
 
-        if(aux->valor > num){
+        if(aux->valor >= num){
             if(ant){
                 ant->prox = novo;
-                novo->prox = aux;
             }else{
                 l->inicio = novo;
-                novo->prox = aux;
             }
+            novo->prox = aux;
         }else{
             aux->prox = novo;
         }

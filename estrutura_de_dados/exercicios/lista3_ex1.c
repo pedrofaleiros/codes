@@ -283,14 +283,11 @@ int escolhe_opcao()
     printf("\n");
     printf("\n1 - incluir no inicio");
     printf("\n2 - incluir no final");
-    printf("");
     printf("\n3 - mostrar lista");
     printf("\n4 - mostrar lista invertida");
     printf("\n5 - mostrar primos");
-    printf("");
     printf("\n6 - remover numero");
     printf("\n7 - remover primos");
-    printf("");
     printf("\n0 - sair");
     printf("\nopcao> ");
 

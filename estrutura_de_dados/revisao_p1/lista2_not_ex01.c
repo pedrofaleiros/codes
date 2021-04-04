@@ -5,6 +5,7 @@ e preencha 2 listas ligadas com N números aleatórios.
     remova os números em comum das 2 listas 
 */
 
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,7 +31,7 @@ int main()
 {
     srand(time(NULL));
 
-    int n, n1, n2;
+    int n, num;
     lista * l1, * l2;
 
     l1 = aloca_lista();
@@ -40,18 +41,107 @@ int main()
     scanf("%d", &n);
 
     for(int i = 0; i < n; i++){
-        n1 = rand()%10 + 1;
-        n2 = rand()%10 + 1;
-        inclui_ordenado(l1, n1); 
-        inclui_ordenado(l2, n2);
+        num = rand()%10 + 1;
+        inclui_ordenado(l1, num); 
+        num = rand()%10 + 1;
+        inclui_ordenado(l2, num);
     }
 
+    printf("\n lista 1:");
+    mostra_lista(l1);
+
+    printf("\n lista 2:");
+    mostra_lista(l2);
+
+    remove_iguais(l1, l2);
+
+    printf("\n lista 1:");
+    mostra_lista(l1);
+
+    printf("\n lista 2:");
+    mostra_lista(l2);
 
     printf("\n");
     return 0;
 }
 
+void remove_elemento(lista * l, int num)
+{
+    if(l->inicio != NULL){
+        elemento * aux, * ant;
+        ant = NULL;
+        aux = l->inicio;
 
+        while(aux->prox && aux->valor != num){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor == num){
+            if(ant == NULL){
+                l->inicio = aux->prox;
+            }else{
+                ant->prox = aux->prox;
+            }
+            l->qtd--;
+        }
+    }
+}
+
+void remove_iguais(lista * l1, lista * l2)
+{
+    if(l1->inicio && l2->inicio){
+        elemento * a1, * a2;
+
+        a1 = l1->inicio;
+        a2 = l2->inicio;
+
+        while(a1 && a2){
+            if(a1->valor == a2->valor){
+                remove_elemento(l1, a1->valor);
+                remove_elemento(l2, a1->valor);
+                a1 = a1->prox;
+                a2 = a2->prox;
+            }else if(a1->valor > a2->valor){
+                a2 = a2->prox;
+            }else{
+                a1 = a1->prox;
+            }
+        }
+    }
+}
+
+void inclui_ordenado(lista * l, int num)
+{
+    elemento * novo;
+    novo = aloca_elemento();
+    novo->valor = num;
+
+    if(l->inicio == NULL){
+        l->inicio = novo;
+    }else{
+        elemento * aux, * ant;
+
+        ant = NULL;
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor <= num){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor >= num){
+            if(ant == NULL){
+                l->inicio = novo;
+            }else{
+                ant->prox = novo;
+            }
+            novo->prox = aux;
+        }else{
+            aux->prox = novo;
+        }
+    }
+}
 
 void mostra_lista(lista * l)
 {
