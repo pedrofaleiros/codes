@@ -59,7 +59,7 @@ void inclui_no_inicio(lista * l, int num)
         novo->prox = l->inicio;
         l->inicio = novo;
     }else{
-        l->inicio novo;
+        l->inicio = novo;
     }
     l->qtd++;
 }
@@ -103,7 +103,6 @@ void mostra_lista(lista * l)
         elemento * aux;
         aux = l->inicio;
 
-        printf("\nElementos:");
         while(aux){
             printf("\n %d", aux->valor);
             aux = aux->prox;
