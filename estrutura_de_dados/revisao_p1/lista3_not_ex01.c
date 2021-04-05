@@ -7,3 +7,12 @@ construa as seguintes funções para uma lista duplamente ligada:
     4 - Comparar 2 listas ( falar os numeros iguais e quais sao diferentes)
     5 - incluir de forma ordenada 
 */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+
+    return 0;
+}
