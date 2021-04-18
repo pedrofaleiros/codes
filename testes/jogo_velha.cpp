@@ -4,10 +4,10 @@
     a | s | d
     z | x | c
 */
-//#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <stdlib.h>
-//#include <unistd.h>
-#include <iostream>
+#include <unistd.h>
+// #include <iostream>
 
 #define cima_esq   'q'
 #define cima_meio  'w'
