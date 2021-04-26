@@ -34,20 +34,20 @@ void move_base_para_final(lista *l);
 
 int main()
 {
-    int n;
+    int num;
 
-    while(1){
-        scanf("%d", &n);
+    while(num){
+        scanf("%d", &num);
 
 
-        if(n != 0){
+        if(num){
             lista * cartas;
 
             cartas = aloca_lista();
 
             int i;
 
-            for(i = 1; i <= n; i++){
+            for(i = 1; i <= num; i++){
                 inclui_no_final(cartas, i);
             }
 
@@ -64,8 +64,7 @@ int main()
 
             printf("Remaining card: %d\n", cartas->inicio->valor);
 
-        }else
-            break;
+        }
     }
 
     return 0;
