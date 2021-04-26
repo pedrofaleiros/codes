@@ -3,7 +3,7 @@
 Obs. Implemente as operações Push, pop, stackpop e empty.
 */
 
-// da pra melhorar
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,29 +11,29 @@ typedef int bool;
 #define True 1
 #define False 0
 
-typedef struct stack{
+typedef struct pilha{
     int qtd;
     struct elemento * topo;
-}stack;
+}pilha;
 
 typedef struct elemento{
     int valor;
     struct elemento * prox;
 }elemento;
 
-stack * aloca_pilha();
+pilha * aloca_pilha();
 elemento * aloca_elemento();
-void push(int num);
-int pop();
-int stackpop();
-bool empty();
+void push(pilha * p, int num);
+int pop(pilha * p);
+int stackpop(pilha * p);
+bool empty(pilha * p);
 int escolhe_opcao();
-
-stack * pilha;
 
 int main()
 {
-    pilha = aloca_pilha();
+    pilha * p;
+    p = aloca_pilha();
+    
     int opcao = 1, num;
 
     while(opcao != 0){
@@ -42,21 +42,11 @@ int main()
         if(opcao == 1){
             printf("\nnumero> ");
             scanf("%d", &num);
-            push(num);
+            push(p, num);
         }else if(opcao == 2){
-            int num = pop();
-            if(num != -1){
-                printf("\nnumero removido> %d", num);
-            }else{
-                printf("\n pilha vazia");
-            }
+            (stackpop(p) == -1) ? printf("\n lista vazia") : printf("\n numero removido: %d", pop(p));
         }else if(opcao == 3){
-            int num = stackpop();
-            if(num != -1){
-                printf("\nnumero do topo> %d", num);
-            }else{
-                printf("\n pilha vazia");
-            }
+            (stackpop(p) == -1) ? printf("\n lista vazia") : printf("\n numero do topo: %d", stackpop(p));
         }else if(opcao == 0){
             printf("\n fim");
         }else{
@@ -76,38 +66,38 @@ int escolhe_opcao()
     printf("\n2 - pop");
     printf("\n3 - stackpop");
     printf("\n0 - sair");
-    printf("\nopcao> ");
+    printf("\nopcao: ");
 
     scanf("%d", &opcao);
 
     return opcao;
 }
 
-int stackpop()
+int stackpop(pilha * p)
 {
-    if(!empty())
-        return pilha->topo->valor;
+    if(!empty(p))
+        return p->topo->valor;
     else
         return -1;
 }
 
-bool empty()
+bool empty(pilha * p)
 {
-    if(pilha->topo == NULL)
+    if(p->topo == NULL)
         return True;
     else
         return False;
 }
 
-int pop()
+int pop(pilha * p)
 {
-    if(!empty()){
+    if(!empty(p)){
         elemento * aux;
-        aux = pilha->topo;
+        aux = p->topo;
         
         int num = aux->valor;
         
-        pilha->topo = aux->prox;
+        p->topo = aux->prox;
         free(aux);
 
         return num;
@@ -116,19 +106,19 @@ int pop()
     }
 }
 
-void push(int num)
+void push(pilha * p, int num)
 {
     elemento * novo;
     novo = aloca_elemento();
     novo->valor = num;
 
-    if(pilha->topo != NULL){
-        novo->prox = pilha->topo;
-        pilha->topo = novo;
+    if(p->topo != NULL){
+        novo->prox = p->topo;
+        p->topo = novo;
     }else{
-        pilha->topo = novo;
+        p->topo = novo;
     }
-    pilha->qtd++;
+    p->qtd++;
 }
 
 elemento * aloca_elemento()
@@ -142,12 +132,13 @@ elemento * aloca_elemento()
     return novo;
 }
 
-stack * aloca_pilha()
+pilha * aloca_pilha()
 {
-    stack * nova;
+    pilha * nova;
 
-    nova = (stack*)malloc(sizeof(stack));
+    nova = (pilha*)malloc(sizeof(pilha));
     nova->topo = NULL;
+    nova->qtd = 0;
 
     return nova;
 }
