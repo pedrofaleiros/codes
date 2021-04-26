@@ -135,4 +135,3 @@ void inclui_elemento(lista *l, int x)
 
     l->qtd += 1;
 }
-

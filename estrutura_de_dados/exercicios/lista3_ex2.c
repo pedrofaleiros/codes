@@ -2,6 +2,8 @@
 2) Construa uma pilha utilizando uma lista ligada.
 Obs. Implemente as operações Push, pop, stackpop e empty.
 */
+
+// da pra melhorar
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,6 +12,7 @@ typedef int bool;
 #define False 0
 
 typedef struct stack{
+    int qtd;
     struct elemento * topo;
 }stack;
 
@@ -61,6 +64,7 @@ int main()
         }
     }
 
+    printf("\n");
     return 0;
 }
 
@@ -124,6 +128,7 @@ void push(int num)
     }else{
         pilha->topo = novo;
     }
+    pilha->qtd++;
 }
 
 elemento * aloca_elemento()

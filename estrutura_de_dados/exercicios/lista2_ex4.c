@@ -20,7 +20,7 @@ typedef struct elemento{
 
 lista* aloca_lista();
 elemento* aloca_elemento();
-void inclui_elemento(lista *l, int x);
+void inclui_elemento(lista *l, int num);
 void mostra_valores_iguais(lista *l1, lista *l2);
 
 int main()
@@ -53,7 +53,7 @@ int main()
     return 0;
 }
 
-void mostra_valores_iguais(lista *l1, lista *l2)
+void mostra_valores_iguais(lista *l1, lista *l2) //balance line
 {
     if(l1->inicio && l2->inicio){
         elemento * a1, * a2;
@@ -110,37 +110,37 @@ elemento* aloca_elemento()
     return novo;
 }
 
-void inclui_elemento(lista *l, int x) //inclui ordenado
+void inclui_elemento(lista *l, int num) // inclui ordenado
 {
     elemento * novo;
 
     novo = aloca_elemento();
-    novo->valor = x;
+    novo->valor = num;
 
-    if(l->inicio){
-        elemento * aux, * ant;
+    if(l->inicio != NULL)
+    {
+        elemento * aux, * ant = NULL;
 
-        ant = NULL;
         aux = l->inicio;
 
-        while(aux->prox){
-            if(aux->valor > x){
-                if(ant){
-                    ant->prox = novo;
-                }else{
-                    l->inicio = novo;
-                }
-                novo->prox = aux;
-                l->qtd += 1;
-                return;
-            }else{
-                ant = aux;
-                aux = aux->prox;
-            }
+        while(aux->prox && aux->valor < num){
+            ant = aux;
+            aux = aux->prox;
         }
-        aux->prox = novo;
+
+        if(aux->valor >= num){
+            if(ant != NULL)
+                ant->prox = novo;
+            else
+                l->inicio = novo;
+
+            novo->prox = aux;   
+        }else{
+            aux->prox = novo;
+        }
+
     }else{
         l->inicio = novo;
     }
-    l->qtd += 1;
+    l->qtd++;
 }

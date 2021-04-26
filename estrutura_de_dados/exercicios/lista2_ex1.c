@@ -56,7 +56,8 @@ int main(){
     return 0;
 }
 
-void mostra_pares(lista * l){
+void mostra_pares(lista * l)
+{
     if(l->inicio){
         reg * aux;
         int achou = 0;
@@ -81,7 +82,8 @@ void mostra_pares(lista * l){
     }
 }
 
-void mostra_lista(lista * l){
+void mostra_lista(lista * l)
+{
     if(l->inicio){
         reg * aux;
 
@@ -98,7 +100,8 @@ void mostra_lista(lista * l){
     }
 }
 
-void inclui_na_lista(lista * l){
+void inclui_na_lista(lista * l)
+{
     int num;
     printf("Incluir numero: ");
     scanf("%d", &num);
@@ -121,7 +124,8 @@ void inclui_na_lista(lista * l){
     l->qtd++;
 }
 
-int escolhe_opcao(){
+int escolhe_opcao()
+{
     int opcao;
 
     printf("\n1 - Incluir Numero\n");
@@ -134,7 +138,8 @@ int escolhe_opcao(){
     return opcao;
 }
 
-lista * aloca_lista(){
+lista * aloca_lista()
+{
     lista * nova_lista;
 
     nova_lista = (lista*)malloc(sizeof(lista));
@@ -144,7 +149,8 @@ lista * aloca_lista(){
     return nova_lista;
 }
 
-reg * aloca_reg(){
+reg * aloca_reg()
+{
     reg * novo_reg;
 
     novo_reg = (reg*)malloc(sizeof(reg));

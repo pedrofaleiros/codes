@@ -11,12 +11,13 @@ Solicite ao usuário que preencha os N sanduíches e mostre na tela:
     c) Qual é o peso médio dos sanduíches.
     d) Em caso de compra de 3 de cada um dos sanduíches qual será o valor da compra?
 */
-
+// pronto
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct burger{
-    char nome[30];
+    char * nome;
     float valor;
     float peso;
     float avaliacao;
@@ -28,7 +29,8 @@ void mostra_melhor_avaliado(burger *sand, int n);
 void mostra_peso_medio(burger *sand, int n);
 void mostra_preco_total(burger *sand, int n);
 
-int main(){
+int main()
+{
 
     int n;
     burger *sand;
@@ -51,15 +53,17 @@ int main(){
 
     mostra_preco_total(sand, n);
 
+    printf("\n");
     return 0;
 }
 
-void mostra_letra_a(burger *sand, int n){
+void mostra_letra_a(burger *sand, int n)
+{
     int tem_letra = 0;
 
     printf("\nNomes que comecam com \'a\':");
     for(int i = 0; i < n; i++){
-        if(sand[i].nome[0] == 'a'){
+        if(sand[i].nome[0] == 'a' || sand[i].nome[0] == 'A'){
             tem_letra = 1;
             printf("\n%s", sand[i].nome);
         }
@@ -71,7 +75,8 @@ void mostra_letra_a(burger *sand, int n){
 
 }
 
-void mostra_melhor_avaliado(burger *sand, int n){
+void mostra_melhor_avaliado(burger *sand, int n)
+{
     float melhor = 0;
     for(int i = 0; i < n; i++){
         if(sand[i].avaliacao >= melhor){
@@ -88,7 +93,8 @@ void mostra_melhor_avaliado(burger *sand, int n){
 
 }
 
-void mostra_peso_medio(burger *sand, int n){
+void mostra_peso_medio(burger *sand, int n)
+{
     float peso = 0;
     for(int i = 0; i < n; i++){
         peso += sand[i].peso;
@@ -97,7 +103,8 @@ void mostra_peso_medio(burger *sand, int n){
     printf("\nPeso medio dos sanduiches: %.2f gramas", peso/n);
 }
 
-void mostra_preco_total(burger *sand, int n){
+void mostra_preco_total(burger *sand, int n)
+{
     float preco_total = 0;
     for(int i = 0; i < n; i++){
         preco_total += (sand[i].valor * 3);
@@ -106,14 +113,22 @@ void mostra_preco_total(burger *sand, int n){
     printf("\nPreco se pedir 3 de cada: R$%.2f", preco_total);
 }
 
-void cadastra_sanduiche(burger *sand){
+void cadastra_sanduiche(burger *sand)
+{
+    char nome[50];
+
     printf("\nNome: ");
-    scanf("%s", sand->nome);
+    scanf("%s", nome);
+
+    sand->nome = (char*)malloc(sizeof(char)*strlen(nome));
+    strcpy(sand->nome, nome);
+
     printf("\nValor: ");
     scanf("%f", &sand->valor);
+
     printf("\nPeso: ");
     scanf("%f", &sand->peso);
+
     printf("\nAvaliacao: ");
     scanf("%f", &sand->avaliacao);
-
 }

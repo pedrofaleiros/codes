@@ -50,31 +50,41 @@ int main()
     while(opcao != 0)
     {
         opcao = escolhe_opcao();
-        
-        if(opcao == 1){
-            printf("\nnumero> ");
-            scanf("%d", &num);
-            inclui_inicio(l, num);
-        }else if(opcao == 2){
-            printf("\nnumero> ");
-            scanf("%d", &num);
-            inclui_fim(l, num);
-        }else if(opcao == 3){
-            mostra_lista(l); 
-        }else if(opcao == 4){
-            mostra_lista_invertida(l); 
-        }else if(opcao == 5){
-            mostra_primos_lista(l); 
-        }else if(opcao == 6){
-            printf("\nnumero> ");
-            scanf("%d", &num);
-            remove_elemento(l, num);
-        }else if(opcao == 7){
-            remove_primos(l);
-        }else if(opcao == 0){
-            printf("\n fim"); 
-        }else{
-            printf("\n opcao invalida");
+
+        switch(opcao)
+        {
+            case 1:
+                printf("\nnumero> ");
+                scanf("%d", &num);
+                inclui_inicio(l, num);
+                break;
+            case 2:
+                printf("\nnumero> ");
+                scanf("%d", &num);
+                inclui_fim(l, num);
+                break;
+            case 3:
+                mostra_lista(l); 
+                break;
+            case 4: 
+                mostra_lista_invertida(l);
+                break;
+            case 5:
+                mostra_primos_lista(l);
+                break;
+            case 6:
+                printf("\nnumero> ");
+                scanf("%d", &num);
+                remove_elemento(l, num);
+                break;
+            case 7:
+                remove_primos(l);
+                break;
+            case 0:
+                break;
+            default:
+                printf("\n opcao invalida");
+                break;
         }
     }
     
@@ -182,7 +192,7 @@ void mostra_lista(lista * l)
         elemento * aux;
         aux = l->inicio;
 
-        printf("\n> numeros:");
+        printf("\n> lista:");
         while(aux != NULL){
             printf("\n %d", aux->valor);
             aux = aux->prox;
@@ -198,7 +208,7 @@ void mostra_lista_invertida(lista * l)
         elemento * aux;
         aux = l->fim;
 
-        printf("\n> numeros:");
+        printf("\n> lista invertida:");
         while(aux != NULL){
             printf("\n %d", aux->valor);
             aux = aux->ant;
@@ -221,9 +231,6 @@ void inclui_inicio(lista * l , int num)
         aux->ant = novo;
         novo->prox = aux;
         l->inicio = novo;
-        /* l->inicio->ant = novo;
-        novo->prox = l->inicio;
-        l->inicio = novo; */
     }else{
         l->inicio = novo;
         l->fim = novo;
@@ -244,9 +251,6 @@ void inclui_fim(lista * l, int num)
         aux->prox = novo;
         novo->ant = aux;
         l->fim = novo;
-        /* l->fim->prox = novo;
-        novo->ant = l->fim;
-        l->fim = novo; */
     }else{
         l->inicio = novo;
         l->fim = novo;

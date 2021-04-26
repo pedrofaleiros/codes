@@ -49,7 +49,8 @@ int main()
     return 0;
 }
 
-void mostra_lista(lista * l){
+void mostra_lista(lista * l)
+{
     if(l->inicio){
         reg * aux;
 
@@ -65,7 +66,8 @@ void mostra_lista(lista * l){
     }
 }
 
-void inclui_na_lista(lista * l, int num){
+void inclui_na_lista(lista * l, int num)
+{
     
     reg * novo;
     novo = aloca_reg();
@@ -85,7 +87,8 @@ void inclui_na_lista(lista * l, int num){
     l->qtd++;
 }
 
-lista * aloca_lista(){
+lista * aloca_lista()
+{
     lista * nova_lista;
 
     nova_lista = (lista*)malloc(sizeof(lista));
@@ -95,7 +98,8 @@ lista * aloca_lista(){
     return nova_lista;
 }
 
-reg * aloca_reg(){
+reg * aloca_reg()
+{
     reg * novo_reg;
 
     novo_reg = (reg*)malloc(sizeof(reg));
