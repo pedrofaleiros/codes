@@ -1,18 +1,10 @@
-/*
-Similar ao código bubblesort.c, leia um valor N do usuário,  
-aloque um vetor de tamanho N, preencha esse vetor com N
-números aleatórios e utilizando o algorítmo insertionsort 
-calcule o tempo para ordenar um vetor de tamanho N.
-
-Monte um gráfico da curva do aumento de tempo de execução conforme se aumenta o valor de N.
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "omp.h"
 
 long long int * aloca_vetor(long long int num);
-void insertionsort(long long int * vet, long long int tam);
+void bubblesort(long long int * vet, long long int tam);
 
 int main()
 {
@@ -20,7 +12,7 @@ int main()
 
     FILE * fl;
 
-    fl = fopen("tempo_insertion.csv", "w");
+    fl = fopen("tempo_bubble.csv", "w");
     if(fl == NULL)
         return 0;
 
@@ -34,7 +26,7 @@ int main()
     vetor = aloca_vetor(n);
     
     t1 = omp_get_wtime();
-    insertionsort(vetor, n);
+    bubblesort(vetor, n);
     t2 = omp_get_wtime();
 
     printf("\n tempo decorrido: %f", t2-t1);
@@ -45,20 +37,19 @@ int main()
     return 0;
 }
 
-void insertionsort(long long int * vet, long long int tam)
+void bubblesort(long long int * vet, long long int tam)
 {
-    long long int i, j, aux;
+    long long int aux, i, j;
+    int trocou = 1;
 
-    for(i = 1; i< tam; i++){
-        aux = vet[i];
-        int sair = 0;
-        for(j = i - 1; j>= 0 && !sair; j--){
-            if(vet[j] > aux){
-                vet[j+1] = vet[j];
-                vet[j] = aux;
-            }else{
+    for(i = 0; i < tam-1 && trocou; i++){
+        trocou = 0;
+        for(j = 0; j < tam-i-1; j++){
+            if(vet[j] > vet[j+1]){
+                aux = vet[j];
+                vet[j] = vet[j+1];
                 vet[j+1] = aux;
-                sair = 1;
+                trocou = 1;
             }
         }
     }
