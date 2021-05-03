@@ -10,6 +10,12 @@ int main()
 {
     srand(time(NULL));
 
+    FILE * fl;
+
+    fl = fopen("tempos.csv", "a");
+    if(fl == NULL)
+        return 0;
+
     long long int * vetor;
     long long int n, i;
     double t1, t2;
@@ -24,7 +30,10 @@ int main()
     t2 = omp_get_wtime();
 
     printf("\n tempo decorrido: %f", t2-t1);
+    fprintf(fl,"%lld;%f\n",n,t2-t1);
+    fclose(fl);
 
+    printf("\n");
     return 0;
 }
 
