@@ -32,11 +32,20 @@ int main()
 
     numeros = aloca_lista();
 
-    preenche_lista(numeros, 10);
+    lint sim;
 
+    printf("\n> ");
+    scanf("%lld", &sim);
+
+    preenche_lista(numeros, sim);
+
+    double t1, t2;
+
+    t1 = omp_get_wtime();
     insertionsort(numeros);
+    t2 = omp_get_wtime();
 
-    mostra_lista(numeros);
+    printf("\n tempo: %f", t2-t1);
 
     printf("\n");
     return 0;
@@ -44,41 +53,29 @@ int main()
 
 void insertionsort(lista * l)
 {
-/*     long long int i, j, aux;
-
-    for(i = 1; i< tam; i++){
-        aux = vet[i];
-        int sair = 0;
-        for(j = i - 1; j>= 0 && !sair; j--){
-            if(vet[j] > aux){
-                vet[j+1] = vet[j];
-                vet[j] = aux;
-            }else{
-                vet[j+1] = aux;
-                sair = 1;
-            }
-        }
-    } */
-
-    elemento * aux, * aux2;
+    elemento * aux1, * aux2;
     lint num_aux;
 
-    aux = l->inicio->prox;
-    while(aux){
-        num_aux = aux->valor;
+
+    aux1 = l->inicio->prox;
+
+    while(aux1 != NULL){
+        num_aux = aux1->valor;
         int sair = 0;
-        aux2 = aux->ant;
-        while(aux2 && !sair){
+        aux2 = aux1->ant;
+        while(aux2 != NULL && sair == 0){
             if(aux2->valor > num_aux){
                 aux2->prox->valor = aux2->valor;
-                aux2->valor = num_aux;
             }else{
                 aux2->prox->valor = num_aux;
-                sair = 1;
+                break;
             }
             aux2 = aux2->ant;
         }
-        aux = aux->prox;
+        if(aux2 == NULL){
+            l->inicio->valor = num_aux;
+        }
+        aux1 = aux1->prox;
     }
 }
 
@@ -93,8 +90,8 @@ void inclui_no_final(lista * l, lint num)
         l->final = novo;
     }else{
         
-        novo->ant = l->final->ant;
         l->final->prox = novo;
+        novo->ant = l->final;
         l->final = novo;
     }
 }

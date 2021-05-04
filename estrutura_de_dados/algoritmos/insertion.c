@@ -20,7 +20,7 @@ int main()
 
     FILE * fl;
 
-    fl = fopen("tempo_insertion.csv", "w");
+    fl = fopen("tempo_insertion.csv", "a");
     if(fl == NULL)
         return 0;
 
