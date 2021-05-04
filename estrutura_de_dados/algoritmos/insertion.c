@@ -55,12 +55,13 @@ void insertionsort(long long int * vet, long long int tam)
         for(j = i - 1; j>= 0 && !sair; j--){
             if(vet[j] > aux){
                 vet[j+1] = vet[j];
-                vet[j] = aux;
             }else{
                 vet[j+1] = aux;
                 sair = 1;
             }
         }
+        if(sair == 0)
+            vet[0] = aux;
     }
 }
 
