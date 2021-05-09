@@ -56,7 +56,6 @@ void insertionsort(lista * l)
     elemento * aux1, * aux2;
     lint num_aux;
 
-
     aux1 = l->inicio->prox;
 
     while(aux1 != NULL){
