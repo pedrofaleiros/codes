@@ -25,6 +25,7 @@ int main()
     quicksort(vet, 0, num-1);
     tempo = omp_get_wtime() - tempo;
 
+/*     mostra_vetor(vet, num); */
     printf("\n tempo: %f", tempo);
 
     printf("\n");
@@ -44,7 +45,47 @@ int ordenado(long long int * vet, long long int tam)
 
 void quicksort(long long int * vet, long long int inicio, long long int final)
 {
-    
+    long long int pivo, i, aux;
+
+    pivo = inicio;
+    i = final;
+
+    while(pivo != i){
+        if(pivo > i){
+            if(vet[pivo] < vet[i]){
+                aux = vet[pivo];
+                vet[pivo] = vet[i];
+                vet[i] = aux;
+
+                aux = pivo;
+                pivo = i;
+                i = aux;
+            }
+        }else{
+            if(vet[pivo] > vet[i]){
+                aux = vet[pivo];
+                vet[pivo] = vet[i];
+                vet[i] = aux;
+
+                aux = pivo;
+                pivo = i;
+                i = aux;
+            }
+        }
+
+        if(i > pivo){
+            i--;
+        }else{
+            i++;
+        }
+    }
+
+    if(inicio < pivo-1){
+        quicksort(vet, inicio, pivo-1);
+    }
+    if(pivo+1 < final){
+        quicksort(vet, pivo+1, final);
+    }
 }
 
 
