@@ -4,103 +4,69 @@
 #include "omp.h"
 
 //errado
-typedef long long int llint;
-
-llint * aloca_vetor(llint tam);
-void mostra_vetor(llint * vet, llint tam);
-void quicksort(llint * vet, llint inicio, llint final);
+long long int * aloca_vetor(long long int tam);
+void mostra_vetor(long long int * vet, long long int tam);
+void quicksort(long long int * vet, long long int inicio, long long int final);
+int ordenado(long long int * vet, long long int tam);
 
 int main()
 {
     srand(time(NULL));
 
-    llint * vet, tamanho;
+    long long int num, * vet;
+    double tempo;
 
-    printf("\n> ");
-    scanf("%lld", &tamanho);
+    printf("\n > ");
+    scanf("%lld", &num);
 
-    vet = aloca_vetor(tamanho);
+    vet = aloca_vetor(num);
 
-    /* mostra_vetor(vet, tamanho);
-    printf("\n-----"); */
-
-    double tempo = omp_get_wtime();
-    quicksort(vet, 0, tamanho-1);
+    tempo = omp_get_wtime();
+    quicksort(vet, 0, num-1);
     tempo = omp_get_wtime() - tempo;
+
     printf("\n tempo: %f", tempo);
-
-    //mostra_vetor(vet, tamanho);
-
 
     printf("\n");
     return 0;
 }
 
-void quicksort(llint * vet, llint inicio, llint final)
+int ordenado(long long int * vet, long long int tam)
 {
-    llint pivo, i, aux;
-
-    pivo = inicio;
-    i = final;
-
-    if(inicio == final) return;
-
-    while(i != pivo){
-        if(pivo < i){
-            if(vet[pivo] > vet[i]){
-                //troca
-                aux = vet[i];
-                vet[i] = vet[pivo];
-                vet[pivo] = aux;
-
-                aux = i;
-                i = pivo;
-                pivo = aux;
-            }
-        }else{
-            if(vet[pivo] < vet[i]){
-                //troca
-                aux = vet[i];
-                vet[i] = vet[pivo];
-                vet[pivo] = aux;
-
-                aux = i;
-                i = pivo;
-                pivo = aux;
-            }
-        }
-        if(i < pivo){
-            i++;
-        }else{
-            i--;
+    long long int i;
+    for(i = 1; i < tam; i++){
+        if(vet[i] < vet[i-1]){
+            return 0;
         }
     }
-
-    quicksort(vet, 0, pivo);
-    quicksort(vet, pivo+1, final);
-
+    return 1;
 }
 
-void mostra_vetor(llint * vet, llint tam)
+void quicksort(long long int * vet, long long int inicio, long long int final)
 {
-    llint i = 0;
-    for(i = 0; i < tam; i++)
-        printf("\n %lld", vet[i]);
+    
 }
 
-llint * aloca_vetor(llint tam)
+
+
+void mostra_vetor(long long int * vet, long long int tam)
 {
-    llint * vet, i, aux, num;
-    vet = calloc(1, sizeof(llint));
-
-    for(i = 0; i < tam; i++)
-        vet[i] = i+1;
-
+    long long int i = 0;
     for(i = 0; i < tam; i++){
-        num = rand()%tam;
-        aux = vet[i];
-        vet[i] = vet[num];
-        vet[num] = aux;
+        printf("\n %lld", vet[i]);
+    }
+}
+
+long long int * aloca_vetor(long long int tam)
+{
+    long long int * vet, i, j;
+
+    vet = (long long int*)malloc(sizeof(long long int)*tam);
+
+    j = 0;
+    for(i = tam; i > 0; i--){
+        vet[j] = i;
+        j++;
     }
 
     return vet;
