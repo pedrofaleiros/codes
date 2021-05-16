@@ -14,20 +14,28 @@ int main()
 {
     srand(time(NULL));
 
-    llint num, * vet;
+    llint * vet, num;
     double tempo;
 
-    printf("\n > ");
-    scanf("%lld", &num);
+    FILE * fl;
 
-    vet = aloca_vetor(num);
+    fl = fopen("tempos.csv", "w");
 
-    tempo = omp_get_wtime();
-    quicksort(vet, 0, num-1);
-    tempo = omp_get_wtime() - tempo;
+    if(fl == NULL) return 0;
 
-    /* mostra_vetor(vet, num); */
-    printf("\n tempo: %f", tempo);
+    for(num = 100000; num <= 10000000; num = num + 100000){
+
+        vet = aloca_vetor(num);
+
+        tempo = omp_get_wtime();
+        quicksort(vet, 0, num-1);
+        tempo = omp_get_wtime() - tempo;
+
+        printf("\n tempo: %f", tempo);
+        fprintf(fl, "%lld;%f\n", num, tempo);
+    }
+
+    fclose(fl);
 
     printf("\n");
     return 0;
@@ -50,9 +58,10 @@ void quicksort(llint * vet, llint inicio, llint final)
 
     if(inicio >= final) return;
 
-    pivo = vet[inicio];
-    j = final;
     i = inicio;
+    pivo = vet[i];
+
+    j = final;
 
     while(j != i){
         if(i > j){
@@ -64,6 +73,10 @@ void quicksort(llint * vet, llint inicio, llint final)
                 aux = i;
                 i = j; 
                 j = aux;
+
+                j--;
+            }else{
+                j++;
             }
         }else{
             if(vet[j] < pivo){
@@ -74,14 +87,18 @@ void quicksort(llint * vet, llint inicio, llint final)
                 aux = i;
                 i = j; 
                 j = aux;
+                
+                j++;
+            }else{
+                j--;
             }
         }
 
-        if(i > j){
+        /* if(i > j){
             j++;
         }else{
             j--;
-        }
+        } */
     }
 
     quicksort(vet, inicio, i);
@@ -98,14 +115,20 @@ void mostra_vetor(llint * vet, llint tam)
 
 llint * aloca_vetor(llint tam)
 {
-    llint * vet, i, j;
+    llint * vet, i, aux, aleatorio;
 
     vet = (llint*)malloc(sizeof(llint)*tam);
 
-    j = 0;
-    for(i = tam; i > 0; i--){
-        vet[j] = i;
-        j++;
+    for(i = 0; i < tam; i++){
+        vet[i] = i+1;
+    }
+
+    for(i = 0; i < tam; i++){
+        aleatorio = rand()%tam;
+
+        aux = vet[i];
+        vet[i] = vet[aleatorio];
+        vet[aleatorio] = aux;
     }
 
     return vet;

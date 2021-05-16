@@ -5,10 +5,11 @@
 
 typedef long long int llint;
 
-llint * aloca_vetor(llint num);
+llint * aloca_vetor(llint tam);
 void mostra_vetor(llint * vet, llint tam);
 void merge(llint * vet, llint inicio, llint meio, llint final);
 void mergesort(llint * vet, llint inicio, llint final);
+int ordenado(llint * vet, llint tam);
 
 
 int main()
@@ -25,10 +26,22 @@ int main()
     mergesort(vet, 0, num-1);
     t1 = omp_get_wtime() - t1;
 
-    printf("\n tempo: %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo: %f", t1);
 
     printf("\n");
     return 0;
+}
+
+int ordenado(llint * vet, llint tam)
+{
+    llint i;
+    for(i = 1; i < tam; i++){
+        if(vet[i] < vet[i-1]){
+            return 0;
+        }
+    }
+    return 1;
 }
 
 void mergesort(llint * vet, llint inicio, llint final)
@@ -88,16 +101,22 @@ void mostra_vetor(llint * vet, llint tam)
     for(; i < tam; i++) printf("\n %lld", vet[i]);
 }
 
-llint * aloca_vetor(llint num)
+llint * aloca_vetor(llint tam)
 {
-    llint * vet, i, j;
+    llint * vet, i, aux, aleatorio;
 
-    vet = calloc(num, sizeof(llint));
+    vet = (llint*)malloc(sizeof(llint)*tam);
 
-    j = num;
-    for(i = 0; i < num; i++){
-        vet[i] = j;
-        j--;
+    for(i = 0; i < tam; i++){
+        vet[i] = i+1;
+    }
+
+    for(i = 0; i < tam; i++){
+        aleatorio = rand()%tam;
+
+        aux = vet[i];
+        vet[i] = vet[aleatorio];
+        vet[aleatorio] = aux;
     }
 
     return vet;
