@@ -3,93 +3,154 @@
 #include <time.h>
 #include "omp.h"
 
-typedef long long int lint;
+typedef long long int llint;
 
-void insertionsort(long long int * vet, long long int tam);
-void insertionsort_2(long long int * vet, long long int tam);
-void mostra_lista(lint * vet, lint tam);
+typedef struct elemento{
+    llint valor;
+    struct elemento * prox;
+}elemento;
+
+typedef struct lista{
+    llint qtd;
+    struct elemento * inicio;
+}lista;
+
+void mostra_lista(llint * vet, llint tam);
+elemento * aloca_elemento();
+lista * aloca_lista();
+llint * aloca_vetor(llint tam);
+void inclui_ordenado(lista * l, llint num);
+void ordena(llint * vet, llint num);
+
 
 int main()
 {
-    lint * vet, tam, i, *vet2;
+    llint * vet, num;
 
-    printf("\n tamanho: ");
-    scanf("%lld", &tam);
+    printf("\n > ");
+    scanf("%lld", &num);
 
-    vet = calloc(tam, sizeof(lint));
-    vet2 = calloc(tam, sizeof(lint));
+    vet = aloca_vetor(num);
 
-    lint j = tam;
-    for(i = 0; i < tam; i++){
-        vet[i] = j;
-        vet2[i] = j;
-        j--;
-    }
-
-    double t1, t2;
+    double t1;
 
     t1 = omp_get_wtime();
-    insertionsort(vet, tam);
-    t2 = omp_get_wtime();
+    ordena(vet, num);
+    t1 = omp_get_wtime() - t1;
 
-    printf("\n tempo 1: %f", t2-t1);
-    
-    t1 = omp_get_wtime();
-    insertionsort_2(vet2, tam);
-    t2 = omp_get_wtime();
-
-    printf("\n tempo 2: %f", t2-t1);
+    printf("\n tempo: %f", t1);
 
     printf("\n");
     return 0;
 }
 
-void mostra_lista(lint * vet, lint tam)
+void ordena(llint * vet, llint num)
 {
-    printf("\n ---------");
-    lint i = 0;
+    llint i;
+
+    lista * l;
+    l = aloca_lista();
+
+    for(i = 0; i < num; i++){
+        inclui_ordenado(l, vet[i]);
+    }
+
+    elemento * aux;
+
+    aux = l->inicio;
+
+    i = 0;
+    while(aux){
+        vet[i] = aux->valor;
+        aux = aux->prox;
+        i++;
+    }
+
+}
+
+llint * aloca_vetor(llint tam)
+{
+    llint * vet, i, aux, aleatorio;
+
+    vet = (llint*)malloc(sizeof(llint)*tam);
+
+    for(i = 0; i < tam; i++){
+        vet[i] = i+1;
+    }
+
+    for(i = 0; i < tam; i++){
+        aleatorio = rand()%tam;
+
+        aux = vet[i];
+        vet[i] = vet[aleatorio];
+        vet[aleatorio] = aux;
+    }
+
+    return vet;
+}
+
+void inclui_ordenado(lista * l, llint num)
+{
+    elemento * novo;
+
+    novo = aloca_elemento();
+    novo->valor = num;
+
+    if(l->inicio != NULL)
+    {
+        elemento * aux, * ant = NULL;
+
+        aux = l->inicio;
+
+        while(aux->prox && aux->valor < num){
+            ant = aux;
+            aux = aux->prox;
+        }
+
+        if(aux->valor >= num){
+            if(ant != NULL)
+                ant->prox = novo;
+            else
+                l->inicio = novo;
+
+            novo->prox = aux;   
+        }else{
+            aux->prox = novo;
+        }
+
+    }else{
+        l->inicio = novo;
+    }
+    l->qtd++;
+}
+
+void mostra_lista(llint * vet, llint tam)
+{
+    llint i = 0;
+    printf("\n ");
     for(;i<tam;i++){
-        printf("\n %lld", vet[i]);
+        printf(" %lld", vet[i]);
     }
 }
 
-void insertionsort(long long int * vet, long long int tam) 
+lista * aloca_lista()
 {
-    // mais rapido
-    long long int i, j, aux;
+    lista * nova_lista;
 
-    for(i = 1; i< tam; i++){
-        aux = vet[i];
-        int sair = 0;
-        for(j = i - 1; j>= 0 && !sair; j--){
-            if(vet[j] > aux){
-                vet[j+1] = vet[j];
-            }else{
-                vet[j+1] = aux;
-                sair = 1;
-            }
-        }
-        if(sair == 0){
-            vet[0] = aux;
-        }
-    }
+    nova_lista = (lista*)malloc(sizeof(lista));
+    nova_lista->qtd = 0;
+    nova_lista->inicio = NULL;
+
+    return nova_lista;
 }
 
-void insertionsort_2(long long int * vet, long long int tam)
+elemento * aloca_elemento()
 {
-    long long int i, j, aux;
+    elemento * novo_elemento;
 
-    for(i = 1; i< tam; i++){
-        aux = vet[i];
-        int sair = 0;
-        for(j = i - 1; j>= 0 && !sair; j--){
-            if(vet[j] > aux){
-                vet[j+1] = vet[j];
-                vet[j] = aux;
-            }else{
-                vet[j+1] = aux;
-                sair = 1;
-            }
-        }
-    }
+    novo_elemento = (elemento*)malloc(sizeof(elemento));
+    novo_elemento->valor = 0;
+    novo_elemento->prox = NULL;
+
+    return novo_elemento;
 }
