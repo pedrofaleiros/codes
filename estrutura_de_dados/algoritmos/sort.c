@@ -13,6 +13,7 @@ void mergesort(llint * vet, llint inicio, llint final);
 void merge(llint * vet, llint inicio, llint meio, llint final);
 void quicksort(llint * vet, llint inicio, llint final);
 int ordenado(llint * vet, llint tam);
+void selectionsort(llint * vet, llint tam);
 
 int main()
 {
@@ -37,6 +38,14 @@ int main()
     t1 = omp_get_wtime() - t1;
     if(ordenado(vet, num)) printf("\n tempo insertion sort : %f", t1);
     free(vet);
+    
+    //selectiontion sort
+    vet = aloca_vetor(num);
+    t1 = omp_get_wtime();
+    selectionsort(vet, num);
+    t1 = omp_get_wtime() - t1;
+    if(ordenado(vet, num)) printf("\n tempo selection sort : %f", t1);
+    free(vet);
 
     //merge sort
     vet = aloca_vetor(num);
@@ -56,6 +65,23 @@ int main()
 
     printf("\n");
     return 0;
+}
+
+void selectionsort(llint * vet, llint tam)
+{
+    llint i, j, aux, ind_menor;
+
+    for(i = 0; i< tam-1; i++){
+        ind_menor = i;
+        for(j = i+1; j < tam; j++){
+            if(vet[ind_menor] > vet[j]){
+                ind_menor = j;
+            }
+        }
+        aux = vet[ind_menor];
+        vet[ind_menor] = vet[i];
+        vet[i] = aux;
+    }
 }
 
 int ordenado(llint * vet, llint tam)
@@ -210,6 +236,17 @@ void insertionsort(llint * vet, llint tam)
         if(sair == 0)
             vet[0] = aux;
     }
+
+    /* llint i, j, aux;
+
+    for(i = 1; i< tam; i++){
+        aux = vet[i];
+        int sair = 0;
+        for(j = i - 1; j>= 0 && vet[j] > aux; j--){
+            vet[j+1] = vet[j];
+        }
+        vet[j+1] = aux;
+    } */
 }
 
 llint * aloca_vetor(llint tam)

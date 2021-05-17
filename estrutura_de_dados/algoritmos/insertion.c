@@ -52,16 +52,10 @@ void insertionsort(long long int * vet, long long int tam)
     for(i = 1; i< tam; i++){
         aux = vet[i];
         int sair = 0;
-        for(j = i - 1; j>= 0 && !sair; j--){
-            if(vet[j] > aux){
-                vet[j+1] = vet[j];
-            }else{
-                vet[j+1] = aux;
-                sair = 1;
-            }
+        for(j = i - 1; j>= 0 && vet[j] > aux; j--){
+            vet[j+1] = vet[j];
         }
-        if(sair == 0)
-            vet[0] = aux;
+        vet[j+1] = aux;
     }
 }
 
