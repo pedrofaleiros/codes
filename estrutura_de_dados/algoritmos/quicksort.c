@@ -23,7 +23,7 @@ int main()
 
     if(fl == NULL) return 0;
 
-    for(num = 100000; num <= 10000000; num = num + 100000){
+    for(num = 1000000; num <= 50000000; num = num + 1000000){
 
         vet = aloca_vetor(num);
 
@@ -31,6 +31,7 @@ int main()
         quicksort(vet, 0, num-1);
         tempo = omp_get_wtime() - tempo;
 
+        printf("\n numeros: %lld", num);
         printf("\n tempo: %f", tempo);
         fprintf(fl, "%lld;%f\n", num, tempo);
     }
@@ -101,7 +102,7 @@ void quicksort(llint * vet, llint inicio, llint final)
         } */
     }
 
-    quicksort(vet, inicio, i);
+    quicksort(vet, inicio, i-1);
     quicksort(vet, i+1, final);
 }
 

@@ -28,7 +28,8 @@ int main()
     t1 = omp_get_wtime();
     bubblesort(vet, num);
     t1 = omp_get_wtime() - t1;
-    if(ordenado(vet, num)) printf("\n tempo bubble sort    : %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo bubble sort    : %f", t1);
     free(vet);
     
     //insertion sort
@@ -36,7 +37,8 @@ int main()
     t1 = omp_get_wtime();
     insertionsort(vet, num);
     t1 = omp_get_wtime() - t1;
-    if(ordenado(vet, num)) printf("\n tempo insertion sort : %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo insertion sort : %f", t1);
     free(vet);
     
     //selectiontion sort
@@ -44,7 +46,8 @@ int main()
     t1 = omp_get_wtime();
     selectionsort(vet, num);
     t1 = omp_get_wtime() - t1;
-    if(ordenado(vet, num)) printf("\n tempo selection sort : %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo selection sort : %f", t1);
     free(vet);
 
     //merge sort
@@ -52,7 +55,8 @@ int main()
     t1 = omp_get_wtime();
     mergesort(vet, 0, num - 1);
     t1 = omp_get_wtime() - t1;
-    if(ordenado(vet, num)) printf("\n tempo merge sort     : %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo merge sort     : %f", t1);
     free(vet);
 
     //quick sort
@@ -60,7 +64,8 @@ int main()
     t1 = omp_get_wtime();
     quicksort(vet, 0, num - 1);
     t1 = omp_get_wtime() - t1;
-    if(ordenado(vet, num)) printf("\n tempo quick sort     : %f", t1);
+    if(ordenado(vet, num))
+        printf("\n tempo quick sort     : %f", t1);
     free(vet);
 
     printf("\n");
@@ -137,10 +142,10 @@ void quicksort(llint * vet, llint inicio, llint final)
         }
     }
 
-    quicksort(vet, inicio, i);
+    quicksort(vet, inicio, i-1);
     quicksort(vet, i+1, final);
-}
 
+}
 void mostra_vetor(llint * vet, llint tam)
 {
     llint i = 0;
