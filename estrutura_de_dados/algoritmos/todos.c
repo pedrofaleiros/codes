@@ -4,27 +4,24 @@
 #include "omp.h"
 #include "sort.h"
 
-llint * aloca_vetor_ordenado(llint num);
-llint * aloca_vetor_invertido(llint num);
-llint * aloca_vetor_aleatorio(llint num);
-
+llint * aloca_vetor(llint num, int forma);
 void mostra_lista(llint * vet, llint num);
-
 
 int main()
 {
     srand(time(NULL));
 
     llint * vet, num;
+    double t1;
 
     printf("\n num: ");
     scanf("%lld", &num);
 
-    printf("\n aleatorio: ");
-    vet = aloca_vetor_aleatorio(num);
+    vet = aloca_vetor(num, 0);
     mostra_lista(vet, num);
-    insertion_sort(vet, num);
-    printf("\n ordenado:");
+    vet = aloca_vetor(num, 1);
+    mostra_lista(vet, num);
+    vet = aloca_vetor(num, -1);
     mostra_lista(vet, num);
 
     printf("\n");
@@ -40,50 +37,33 @@ void mostra_lista(llint * vet, llint num)
         printf(" %lld", vet[i]);
 }
 
-llint * aloca_vetor_aleatorio(llint num)
+llint * aloca_vetor(llint num, int forma)
 {
-    llint * vet, aleatorio, aux, i;
+    llint * vet, i, aleatorio, aux, j;
 
     vet = calloc(num, sizeof(llint));
 
-    for(i = 0; i < num; i++)
-        vet[i] = i+1;
+    if(forma == 1){
+        for(i = 0; i < num; i++)
+            vet[i] = i+1;
+    
+        for(i = 0; i < num; i++){
+            aleatorio = rand()%num;
+            aux = vet[i];
+            vet[i] = vet[aleatorio];
+            vet[aleatorio] = aux;
+        }
+    }else if(forma == -1){
+        j = num;
 
-    for(i = 0; i < num; i++){
-        aleatorio = rand()%num;
-
-        aux = vet[i];
-        vet[i] = vet[aleatorio];
-        vet[aleatorio] = aux;
+        for(i = 0; i < num; i++){
+            vet[i] = j;
+            j--;
+        }
+    }else{
+        for(i = 0; i < num; i++)
+            vet[i] = i+1;
     }
-
-    return vet;
-}
-
-llint * aloca_vetor_invertido(llint num)
-{
-    llint * vet, i, j;
-
-    vet = calloc(num, sizeof(llint));
-
-    j = num;
-
-    for(i = 0; i < num; i++){
-        vet[i] = j;
-        j--;
-    }
-
-    return vet;
-}
-
-llint * aloca_vetor_ordenado(llint num)
-{
-    llint * vet, i;
-
-    vet = calloc(num, sizeof(llint));
-
-    for(i = 0; i < num; i++)
-        vet[i] = i+1;
 
     return vet;
 }
