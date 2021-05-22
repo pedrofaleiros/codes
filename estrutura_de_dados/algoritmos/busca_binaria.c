@@ -25,8 +25,12 @@ int main()
     printf("\n n: ");
     scanf("%lld", &n);
 
+    t1 = omp_get_wtime();
     vet = aloca_vetor(n);
+    t1 = omp_get_wtime() - t1;
+    printf("\n tempo para criar vetor: %f", t1);
 
+    //printf("\n vetor: ");
     //for(x = 0; x < n; x++) printf(" %lld", vet[x]);
     printf("\n buscar numero x: ");
     scanf("%lld", &x);
