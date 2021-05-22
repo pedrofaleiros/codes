@@ -23,7 +23,7 @@ int main()
     printf("\n aleatorio: ");
     vet = aloca_vetor_aleatorio(num);
     mostra_lista(vet, num);
-    bubble_sort(vet, num);
+    insertion_sort(vet, num);
     printf("\n ordenado:");
     mostra_lista(vet, num);
 
