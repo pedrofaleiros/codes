@@ -1,6 +1,4 @@
-def quicksort(vet, inicio, final):
-
-    global pessoas
+def quicksort(pessoas, inicio, final):
 
     if inicio >= final:
         return
@@ -50,9 +48,6 @@ def quicksort(vet, inicio, final):
     quicksort(pessoas, inicio, i-1)
     quicksort(pessoas, i+1, final)
 
-
-
-global pessoas
 pessoas = []
 
 for i in range(5):
