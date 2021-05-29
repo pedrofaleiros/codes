@@ -2,52 +2,53 @@ def quicksort(vet, inicio, final):
 
     global pessoas
 
-    if inicio < final:
+    if inicio >= final:
+        return
 
-        i = inicio
-        pivo = pessoas[i]['preco']
-        j = final
+    i = inicio
+    pivo = pessoas[i]['preco']
+    j = final
 
-        while j != i:
-            if i > j:
-                if pessoas[j]['preco'] > pivo:
-                    aux = pessoas[i]['nome']
-                    pessoas[i]['nome'] = pessoas[j]['nome']
-                    pessoas[j]['nome'] = aux
+    while j != i:
+        if i > j:
+            if pessoas[j]['preco'] > pivo:
+                aux = pessoas[i]['nome']
+                pessoas[i]['nome'] = pessoas[j]['nome']
+                pessoas[j]['nome'] = aux
 
-                    aux = pessoas[i]['preco']
-                    pessoas[i]['preco'] = pessoas[j]['preco']
-                    pessoas[j]['preco'] = aux
+                aux = pessoas[i]['preco']
+                pessoas[i]['preco'] = pessoas[j]['preco']
+                pessoas[j]['preco'] = aux
 
-                    aux = pessoas[i]['materia']
-                    pessoas[i]['materia'] = pessoas[j]['materia']
-                    pessoas[j]['materia'] = aux
+                aux = pessoas[i]['materia']
+                pessoas[i]['materia'] = pessoas[j]['materia']
+                pessoas[j]['materia'] = aux
 
-                    i, j = j, i
+                i, j = j, i
 
-            else:
-                if pessoas[j]['preco'] < pivo:
-                    aux = pessoas[i]['nome']
-                    pessoas[i]['nome'] = pessoas[j]['nome']
-                    pessoas[j]['nome'] = aux
+        else:
+            if pessoas[j]['preco'] < pivo:
+                aux = pessoas[i]['nome']
+                pessoas[i]['nome'] = pessoas[j]['nome']
+                pessoas[j]['nome'] = aux
 
-                    aux = pessoas[i]['preco']
-                    pessoas[i]['preco'] = pessoas[j]['preco']
-                    pessoas[j]['preco'] = aux
+                aux = pessoas[i]['preco']
+                pessoas[i]['preco'] = pessoas[j]['preco']
+                pessoas[j]['preco'] = aux
 
-                    aux = pessoas[i]['materia']
-                    pessoas[i]['materia'] = pessoas[j]['materia']
-                    pessoas[j]['materia'] = aux
+                aux = pessoas[i]['materia']
+                pessoas[i]['materia'] = pessoas[j]['materia']
+                pessoas[j]['materia'] = aux
 
-                    i, j = j, i
+                i, j = j, i
 
-            if i > j:
-                j += 1
-            else:
-                j -= 1
-        
-        quicksort(pessoas, inicio, i-1)
-        quicksort(pessoas, i+1, final)
+        if i > j:
+            j += 1
+        else:
+            j -= 1
+    
+    quicksort(pessoas, inicio, i-1)
+    quicksort(pessoas, i+1, final)
 
 
 
