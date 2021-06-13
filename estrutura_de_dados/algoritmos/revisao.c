@@ -9,29 +9,112 @@ void mostra_vetor(llint * vet, llint tamanho);
 int ordenado(llint * vet, llint tamanho);
 
 void bubblesort(llint * vet, llint tamanho);
+
 void insertionsort(llint * vet, llint tamanho);
+
 void selectionsort(llint * vet, llint tamanho);
+
 void mergesort(llint * vet, llint inicio, llint final);
 void merge(llint * vet, llint inicio, llint meio, llint final);
 
+void quicksort(llint * vet, llint inicio, llint final);
 
 int main()
 {
     srand(time(NULL));
 
+    clock_t t1, t2;
     llint * vet, num;
+    int algoritmo;
 
-    num = 15;
+    /* printf("\n numero: ");
+    scanf("%lld", &num); */
+    num = 10000000;
 
     vet = aloca_vetor(num);
 
-    mergesort(vet, 0, num-1);
-    mostra_vetor(vet, num);
+    printf("\n1 - Bubble\n2 - Insertion\n3 - Selection");
+    printf("\n4 - Merge\n5 - Quick\n> ");
+    scanf("%d", &algoritmo);
 
-    ordenado(vet, num) == 1 ? printf("\nsim") : printf("\nnao");
+    if(algoritmo == 1){
+        printf("\n Bubble Sort:");
+        t1 = clock();
+        bubblesort(vet, num);
+        t2 = clock();
+    }else if(algoritmo == 2){
+        printf("\n Insertion Sort:");
+        t1 = clock();
+        insertionsort(vet, num);
+        t2 = clock();
+    }else if(algoritmo == 3){
+        printf("\n Selection Sort:");
+        t1 = clock();
+        selectionsort(vet, num);
+        t2 = clock();
+    }else if(algoritmo == 4){
+        printf("\n Merge Sort:");
+        t1 = clock();
+        mergesort(vet, 0, num-1);
+        t2 = clock();
+    }else{
+        printf("\n Quick Sort:");
+        t1 = clock();
+        quicksort(vet, 0, num-1);
+        t2 = clock();
+    }
+
+
+    float diff = (((float)t2 - (float)t1) / 1000000.0F);
+    printf("\n %f", diff);
 
     printf("\n");
     return 0;
+}
+
+void quicksort(llint * vet, llint inicio, llint final)
+{
+    llint i, pivo, aux;
+
+    if(inicio >= final)
+        return;
+
+    pivo = inicio;
+    i = final;
+    
+    while(pivo != i){
+        if(pivo > i){
+            if(vet[pivo] < vet[i]){
+                aux = vet[i];
+                vet[i] = vet[pivo];
+                vet[pivo] = aux;
+
+                aux = i;
+                i = pivo;
+                pivo = aux;
+            }
+        }else{
+            if(vet[pivo] > vet[i]){
+                aux = vet[i];
+                vet[i] = vet[pivo];
+                vet[pivo] = aux;
+
+                aux = i;
+                i = pivo;
+                pivo = aux;
+            }
+            
+        }
+
+        if(i < pivo)
+            i++;
+        else
+            i--;
+
+    }
+
+    quicksort(vet, inicio, i);
+    quicksort(vet, i+1, final);
 }
 
 void mergesort(llint * vet, llint inicio, llint final)
