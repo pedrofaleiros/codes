@@ -196,8 +196,6 @@ void insertionsort(llint * vet, llint tamanho)
         }
         vet[j+1] = aux;
     }
-
-
 }
 
 void bubblesort(llint * vet, llint tamanho)
