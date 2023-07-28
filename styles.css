@@ -1,0 +1,57 @@
+body {
+    background-color: #ff3d71;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 32px;
+  }
+  
+  #container {
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .centered {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  button {
+    margin: 10px;
+  }
+  
+  #noBtn {
+    background-color: #fafafa;
+    border: 0;
+    color: red;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-weight: 700;
+    font-size: 24px;
+
+  }
+  
+  #yesBtn {
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 4px 8px;
+    border: 0;
+    color: white;
+    background-color: #ff3d71;
+    font-size: 32px;
+
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
