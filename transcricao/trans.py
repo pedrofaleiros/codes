@@ -2,26 +2,44 @@ import whisper
 import sys
 import os
 
-def transcrever_audio(caminho_audio, caminho_saida="transcricao.txt"):
-    # Carrega o modelo base (use 'small', 'medium', 'large' para mais precisão)
-    modelo = whisper.load_model("medium")
+import warnings
+warnings.filterwarnings("ignore", message="FP16 is not supported on CPU; using FP32 instead")
 
-    # Transcreve o áudio
-    resultado = modelo.transcribe(caminho_audio)
+# 'tiny' 'base' 'small', 'medium', 'large'
+model_name = "medium"
 
-    # Salva a transcrição no arquivo de texto
-    with open(caminho_saida, "w", encoding="utf-8") as f:
-        f.write(resultado["text"])
+def transcribe_audio_seg(audio_file):
 
-    print(f"Transcrição salva em: {caminho_saida}")
+    print('> Carregando modelo...')
+    model = whisper.load_model(model_name)
 
-# Exemplo de uso
+    print('> Transcrevendo...')
+    result = model.transcribe(
+        audio_file, 
+        language="pt", 
+        temperature=0, 
+        # verbose=True,
+        # initial_prompt="Este é um episódio do desenho Os Simpsons."
+        )
+
+    print('> Salvando...')
+    base_name = os.path.splitext(os.path.basename(audio_file))[0]
+    output_dir = "./transcription"
+    os.makedirs(output_dir, exist_ok=True)
+    text_file = os.path.join(output_dir, f"{base_name}.txt")
+
+    with open(text_file, "w", encoding="utf-8") as f:
+        for segment in result["segments"]:
+            f.write(segment["text"].strip() + "\n")
+
+    print(f"> Salvo em: {text_file}")
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Uso: python transcrever.py arquivo_audio.mp3")
+        print(">>> python trans.py audio-file.mp3")
     else:
-        caminho_audio = sys.argv[1]
-        if not os.path.exists(caminho_audio):
-            print("Arquivo de áudio não encontrado!")
+        audio_file = sys.argv[1]
+        if not os.path.exists(audio_file):
+            print(f"Arquivo de áudio não encontrado: ", audio_file)
         else:
-            transcrever_audio(caminho_audio)
+            transcribe_audio_seg(audio_file)
