@@ -35,11 +35,18 @@ def transcribe_audio_seg(audio_file):
     print(f"> Salvo em: {text_file}")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(">>> python trans.py audio-file.mp3")
+    # if len(sys.argv) < 2:
+    #     print(">>> python trans.py audio-file.mp3")
+    # else:
+    #     audio_file = sys.argv[1]
+    #     if not os.path.exists(audio_file):
+    #         print(f"Arquivo de áudio não encontrado: ", audio_file)
+    #     else:
+    #         transcribe_audio_seg(audio_file)
+    audio_file = input("> Nome do arquivo: ")
+    if os.path.exists(audio_file):
+        transcribe_audio_seg(audio_file)
     else:
-        audio_file = sys.argv[1]
-        if not os.path.exists(audio_file):
-            print(f"Arquivo de áudio não encontrado: ", audio_file)
-        else:
-            transcribe_audio_seg(audio_file)
+        print(f"Arquivo de áudio não encontrado: ", audio_file)
+
+        
